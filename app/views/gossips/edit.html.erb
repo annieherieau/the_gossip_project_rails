@@ -7,11 +7,30 @@
     <div class="container row justify-content-md-center"> 
       <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
         <h1 class="mb-4 display-5 text-center">Modifier le gossip n°<%= gossip.id %></h1>
-        <p class="text-secondary mb-5 text-center lead fs-4">Tous les potins les plus croustillants sont ici</p>
+        <p class="text-secondary mb-5 text-center lead fs-4">Ce potin est dépassé, erroné ou incomplet ?
+        <br>Modifie-le dans le formulaire ci-dessous:</p>
       </div>
     </div>
   </div>
 
-  <%# content %>
+    <%# FORMULAIRE %>
+  <% author = gossip.author %>
+  <form action="<%= gossips_edit_path %>" method = "POST" class='w3-light-grey' style="padding: 30px">
+    <label for="author_id">*Auteur : </label> 
+    <input required type="hidden" name="author_id" value="<%= author.id %>" id="author_id"> [<%= author.id %>] <%= author.first_name %> <%= author.last_name %>
+    <br>
+    <label for="title">*Titre : </label> 
+    <br>
+    <input required type="text" name ="title" id="title" value="<%= gossip.title %>">
+    <br>
+    <br>
+    <label for="content">*Balance ton potin : </label><br>
+    <textarea required name="content" id="content" cols="60" rows="10"><%= gossip.content %></textarea>
+    <br><br>
+    <input type="submit" class="w3-button w3-blue" value="Enregister">
+    <a href="<%= root_path %>"><input type="button" value="Annuler" class="w3-button w3-dark-grey"></a>
+    <br>
+    <small>* champs oblogatoires</small>
+  </form>
 
 </section>

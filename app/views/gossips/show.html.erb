@@ -35,6 +35,7 @@
      
     <hr>
     <%# TOUS LES COMMENTAIRES %>
+    <% if comments.length> 0 %>
     <section>
       <h3>Tous les commentaires</h3>
       <% comments.each do |comment| %>
@@ -45,4 +46,5 @@
         </p>
       <% end %>
     </section>
+    <% end %>
 </section>

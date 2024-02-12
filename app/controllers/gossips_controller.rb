@@ -16,6 +16,6 @@ class GossipsController < ApplicationController
   end
 
   def edit
-    
+    gossip = Gossip.find(params['id'].to_i)
   end
 end

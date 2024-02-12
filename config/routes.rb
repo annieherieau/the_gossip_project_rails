@@ -12,10 +12,14 @@ Rails.application.routes.draw do
   # GOSSIPS
   get 'gossips/show'
   get 'gossips/show/:id', to: 'gossips#show'
+ 
+  get 'gossips/new'
+  post 'gossips/new', to: 'gossips#new'
+
   get 'gossips/edit'
   get 'gossips/edit/:id', to: 'gossips#edit'
-  get 'gossips/new' #TODO
-  post 'gossips/new', to: 'gossips#new'#TODO
+  post 'gossips/edit/:id', to: 'gossips#edit'
+
 
   # USERS 
   get 'users/welcome'
