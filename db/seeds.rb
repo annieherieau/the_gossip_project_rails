@@ -96,4 +96,4 @@ puts '--- 20 tags suplémentaires ---'
   )
   t.users << User.all.sample
 end
-puts '--- 1 team ---'
+puts '--- 1 team avec 2 users ---'

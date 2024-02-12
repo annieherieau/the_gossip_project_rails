@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_12_102128) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_12_110655) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_12_102128) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "commenting_user_id"
+    t.bigint "commented_gossip_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commented_gossip_id"], name: "index_comments_on_commented_gossip_id"
+    t.index ["commenting_user_id"], name: "index_comments_on_commenting_user_id"
   end
 
   create_table "gossip_tags", force: :cascade do |t|
