@@ -42,3 +42,13 @@ puts '--- 10 cities ---'
   )
 end
 puts '--- 10 users ---'
+
+20.times do |i|
+  g = Gossip.create!(
+    title: Faker::Lorem.words(number: rand(3..8)).join(' '),
+    content: Faker::Lorem.paragraph(sentence_count: rand(2..8)),
+    # foreign key
+    author: User.all.sample
+  )
+end
+puts '--- 20 gossips avec 1 tag ---'
