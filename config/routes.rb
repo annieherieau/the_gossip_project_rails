@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # ROOT
   root 'gossips#index'
 
+
   # PAGES STATIQUES
   get 'contact', to: 'static_pages#contact'
   get 'team', to: 'static_pages#team'
