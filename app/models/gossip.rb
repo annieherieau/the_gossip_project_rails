@@ -6,4 +6,6 @@ class Gossip < ApplicationRecord
 
   has_many :comments
   has_many :commenting_users, foreign_key: 'commenting_user_id', class_name: 'User', through: :comments
+
+  has_many :likes
 end

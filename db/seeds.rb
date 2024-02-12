@@ -113,3 +113,17 @@ puts '--- 1 team avec 2 users ---'
   )
 end
 puts '--- 30 comments ---'
+
+10.times do |i|
+  Like.create!(
+    user: User.all.sample,
+    gossip: Gossip.all.sample,
+  )
+end
+10.times do |i|
+  Like.create!(
+    user: User.all.sample,
+    comment: Comment.all.sample,
+  )
+end
+puts '--- 20 likes ---'

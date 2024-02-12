@@ -4,4 +4,5 @@ class User < ApplicationRecord
   belongs_to :team, optional: true
   has_many :comments
   has_many :commented_gossips, foreign_key: 'commented_gossip_id', class_name: 'Gossip', through: :comments
+  has_many :likes
 end
