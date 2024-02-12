@@ -41,6 +41,10 @@
              <li class="nav-item">
                 <a class="nav-link" href="<%=contact_path%>">Contact</a>
               </li>
+              <li class="nav-item">
+              <% user = User.all.sample %>
+                <a class="nav-link active" href="<%=users_welcome_path%>/<%= user.first_name%>">: WELCOME :</a>
+              </li>
           </ul>
         </div>
       </div>

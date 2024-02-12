@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   
   # ROOT
@@ -14,6 +15,10 @@ Rails.application.routes.draw do
   get 'gossips/edit'
   get 'gossips/edit/:id', to: 'gossips#edit'
   get 'gossips/new'
+
+  # USERS 
+  get 'users/welcome'
+  get 'users/welcome/:first_name', to: 'users#welcome'
 
 
 
