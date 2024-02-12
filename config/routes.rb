@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   get 'gossips/show/:id', to: 'gossips#show'
   get 'gossips/edit'
   get 'gossips/edit/:id', to: 'gossips#edit'
-  get 'gossips/new'
+  get 'gossips/new' #TODO
+  post 'gossips/new', to: 'gossips#new'#TODO
 
   # USERS 
   get 'users/welcome'
