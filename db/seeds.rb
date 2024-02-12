@@ -14,6 +14,13 @@ Faker::UniqueGenerator.clear
 puts '----- start seed ------'
 City.destroy_all
 User.destroy_all
+GossipTag.destroy_all
+Gossip.destroy_all
+Tag.destroy_all
+Team.destroy_all
+Comment.destroy_all
+
+
 
 # reset tables
 ActiveRecord::Base.connection.tables.each do |t|
@@ -97,3 +104,12 @@ puts '--- 20 tags suplémentaires ---'
   t.users << User.all.sample
 end
 puts '--- 1 team avec 2 users ---'
+
+30.times do |i|
+  Comment.create!(
+    content: Faker::Lorem.paragraph(sentence_count: rand(1..3)),
+    commented_gossip: Gossip.all.sample,
+    commenting_user: User.all.sample
+  )
+end
+puts '--- 30 comments ---'
