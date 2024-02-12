@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get 'gossips/new'
   get 'gossips/edit'
-  get 'gossips/show'
+  get 'gossips/show/:id', to: 'gossips#show'
   
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

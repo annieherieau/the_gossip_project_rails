@@ -11,5 +11,18 @@
   </div>
 
   <%# content %>
-
+  <div class="container overflow-hidden">
+  <div class="row justify-content-md-center">
+  <% Gossip.all.each do |gossip| %>
+    <div class="card border-0 border-bottom border-primary shadow-sm overflow-hidden my-4">
+      <div class="card-body p-3">
+        <h3><%= gossip.title %></h3>
+        <p><strong>Auteur : <%= gossip.author.first_name %></strong></p>
+        
+        <p><%= gossip.content %></p>
+        <p>Potin n°<%= (gossip.id).to_s.rjust(2, '0')%> - Commentaires : <%= Comment.where(commented_gossip_id: gossip.id).length %> - Likes : <%= Like.where(gossip_id: gossip.id).length %></p>
+        <p class="w3-center"><a href="/gossips/show/<%= gossip.id %>">Lire</a> - <a href="/gossips/edit/<%= gossip.id %>">Modifier</a></p>
+      </div>
+    </div>
+  <% end %>
 </section>

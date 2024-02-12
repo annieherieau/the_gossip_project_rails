@@ -61,7 +61,7 @@ puts '--- 10 tags ---'
 20.times do |i|
   g = Gossip.create!(
     title: Faker::Lorem.words(number: rand(3..8)).join(' '),
-    content: Faker::Lorem.paragraph(sentence_count: rand(2..8)),
+    content: Faker::Lorem.paragraph(sentence_count: rand(5..12)),
     # foreign key
     author: User.all.sample
   )
