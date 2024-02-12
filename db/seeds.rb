@@ -37,6 +37,7 @@ puts '--- 10 cities ---'
     email: Faker::Internet.unique.email,
     age: rand(18..90),
     description: Faker::Lorem.paragraph(sentence_count: rand(2..4)),
+    is_admin: false,
     # foreign key
     city: City.all.sample
   )
@@ -77,3 +78,22 @@ puts '--- 20 gossips avec 1 tag ---'
   )
 end
 puts '--- 20 tags suplémentaires ---'
+
+1.times do |i|
+  t = Team.create!(
+    name: "Gossip Team"
+  )
+  annie = User.create!(
+    first_name: 'Annie',
+    last_name: 'Herieau',
+    email: 'annie.herieau@gmail.com',
+    age: 44,
+    description: Faker::Lorem.paragraph(sentence_count: rand(2..4)),
+    is_admin: true,
+    team: t,
+    # foreign key
+    city: City.create!(name: 'Montauban', zip_code: '82000')
+  )
+  t.users << User.all.sample
+end
+puts '--- 1 team ---'
