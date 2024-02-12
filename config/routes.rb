@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   # USERS 
   get 'users/welcome'
   get 'users/welcome/:first_name', to: 'users#welcome'
+  get 'users/show'
+  get 'users/show/:id', to: 'users#show'
 
 
 

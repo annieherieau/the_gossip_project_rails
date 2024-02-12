@@ -17,7 +17,7 @@
     <div class="card border-0 border-bottom border-primary shadow-sm overflow-hidden my-4" id="<%= gossip.id %>">
       <div class="card-body p-3">
         <h3><%= gossip.title %></h3>
-        <p><strong>Auteur : <%= gossip.author.first_name %></strong></p>
+        <p><strong>Auteur : <a href="<%= users_show_path %>/<%= gossip.author.id %>"><%= gossip.author.first_name %></a></strong></p>
         
         <p><%= gossip.content %></p>
         <p>Potin n°<%= gossip.id %> - Commentaires : <%= Comment.where(commented_gossip_id: gossip.id).length %> - Likes : <%= Like.where(gossip_id: gossip.id).length %></p>

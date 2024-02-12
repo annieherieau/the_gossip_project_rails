@@ -1,0 +1,38 @@
+<% user = User.find(params[:id].to_s) %>
+<% city = user.city %>
+
+<!-- - Bootstrap Brain Component -->
+<section class="bg-light py-3 py-md-5 py-xl-8">
+  <%# TITRE %>
+  <div class="container">
+    <div class="container row justify-content-md-center"> 
+      <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+        <h1 class="mb-4 display-5 text-center">Profil Utilisateur n°<%= user.id %></h1>
+        <p class="text-secondary mb-5 text-center lead fs-4"> <%= user.first_name %> <%= user.last_name %></p>
+      </div>
+    </div>
+  </div>
+
+  <%# PROFIL %>
+  <div class="container overflow-hidden">
+    <div class="row justify-content-md-center">
+    <div class="card border-0 border-bottom border-primary shadow-sm overflow-hidden">
+          <div class="card-body p-5">
+      <p><strong>Identifiant : </strong><%= user.id %></p>
+      <p><strong>Prénom : </strong><%= user.first_name %></p>
+      <p><strong>Nom : </strong><%= user.last_name %></p>
+      <p><strong>Âge : </strong><%= user.age %> ans</p>
+      <p><strong>Email : </strong><%= user.email %></p>
+      <p><strong>Ville : </strong><%= city.zip_code %> <%= city.name %></p>
+      <p><strong>Description : </strong><%= user.description %></p>
+      <p><strong>Nombre de Potins : </strong><%= Gossip.where(author_id: user.id).length %> </p>
+      <p><strong>Nombre de Commentaires : </strong><%= Comment.where(commenting_user_id: user.id).length %> </p>
+      <p><strong>Nombre de Likes : </strong><%= Like.where(user_id: user.id).length %> </p>
+
+      <p class=""><a href="<%= root_path %>">Retour</a></p>
+     </div>
+      </div>
+    </div>
+  </div>
+
+</section>
