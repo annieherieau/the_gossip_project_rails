@@ -21,7 +21,7 @@
         
         <p><%= gossip.content %></p>
         <p>Potin n°<%= (gossip.id).to_s.rjust(2, '0')%> - Commentaires : <%= Comment.where(commented_gossip_id: gossip.id).length %> - Likes : <%= Like.where(gossip_id: gossip.id).length %></p>
-        <p class="w3-center"><a href="/gossips/show/<%= gossip.id %>">Lire</a> - <a href="/gossips/edit/<%= gossip.id %>">Modifier</a></p>
+        <p class="w3-center"><a href="<%= gossips_show_path %>/<%= gossip.id %>">Lire</a> - <a href="<%= gossips_edit_path %>/<%= gossip.id %>">Modifier</a></p>
       </div>
     </div>
   <% end %>
