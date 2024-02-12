@@ -5,12 +5,43 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <!--bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   </head>
 
   <body>
+    <header>
+      <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">The Gossip Project</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <div class="collapse navbar-collapse" id="navbarsExample02">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="<%=root_path%>">Accueil</a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="<%=gossip_new_path%>">Ajouter un Gossip</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="<%=team_team_path%>">Team</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="<%=team_contact_path%>">Contact</a>
+              </li>
+             
+            </ul>
+          </div>
+        </div>
+      </nav>
+    
+    </header>
     <%= yield %>
   </body>
 </html>
