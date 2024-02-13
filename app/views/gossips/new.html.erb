@@ -22,7 +22,8 @@
           <p class="alert alert-danger" role="alert"><%= message %></p>
         <% end %>
       <% end %>
-      <form action="<%= gossips_path(@gossip) %>" method = "POST">
+
+      <%= form_tag url_for(action: 'create'), method: "post" do %>
       <%# authenticity token %>
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
         <input type="hidden" name="author_id" value="">
@@ -58,9 +59,9 @@
           >Annuler</a
          >
     <br>
-    <small id="helpId" class="text-muted">* champs oblogatoires</small>
+    <small id="helpId" class="text-muted">* champs obligatoires</small>
   </form>
-  
+   <% end %>
 </div>
 </div>
 </section>
