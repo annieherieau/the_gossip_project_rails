@@ -6,7 +6,7 @@
     <div class="container row justify-content-md-center"> 
       <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
         <h1 class="mb-4 display-5 text-center"><%=  @gossip.title %></h1>
-        <p class="text-secondary mb-5 text-center lead fs-4"><strong>Auteur :</strong> <%= link_to "#{@gossip.author.first_name}", user_path(@gossip.author.id) %></p>
+        <p class="text-secondary mb-5 text-center lead fs-4"><strong>Auteur :</strong> <%= link_to "#{@gossip.author.first_name}", user_path(@gossip.author) %></p>
       </div>
     </div>
   </div>
@@ -27,7 +27,7 @@
           name=""
           id=""
           class="btn btn-primary"
-          href="<%= edit_gossip_path(id: @gossip.id) %>"
+          href="<%= edit_gossip_path(@gossip) %>"
           role="button"
           >Voir plus</a
          >

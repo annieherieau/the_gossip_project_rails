@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   
   # ROOT
   root 'gossips#index'
-  get '/#:id', to: 'gossips#index', as: 'index'
 
 
   # PAGES STATIQUES
