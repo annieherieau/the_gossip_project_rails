@@ -1,12 +1,12 @@
-<% gossip = Gossip.find(params[:id].to_s) %>
+
 <!-- GOSSIP  -->
 <section class="bg-light py-3 py-md-5 py-xl-8">
   <%# TITRE %>
   <div class="container">
     <div class="container row justify-content-md-center"> 
       <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
-        <h1 class="mb-4 display-5 text-center"><%=  gossip.title %></h1>
-        <p class="text-secondary mb-5 text-center lead fs-4"><strong>Auteur :</strong> <%=  gossip.author.first_name %></p>
+        <h1 class="mb-4 display-5 text-center"><%=  @gossip.title %></h1>
+        <p class="text-secondary mb-5 text-center lead fs-4"><strong>Auteur :</strong> <%= link_to "#{@gossip.author.first_name}", user_path(@gossip.author.id) %></p>
       </div>
     </div>
   </div>
@@ -16,11 +16,30 @@
     <div class="row justify-content-md-center">
     <div class="card border-0 border-bottom border-primary shadow-sm overflow-hidden">
           <div class="card-body p-5">
-      <p class="">Potin n°<%= gossip.id %></p>
+      <p class="">Potin n°<%= @gossip.id %></p>
       <div class="">
-        <p><%=  gossip.content %></p>
+        <p><%=  @gossip.content %></p>
       </div>
-      <p class=""><a href="<%= gossips_edit_path %>/<%=  gossip.id %>">Modifier</a> - <a href="<%= root_path %>">Retour</a></p>
+      <!--LIENS -->
+       <!--LIENS -->
+        <div class="text-right">
+         <a
+          name=""
+          id=""
+          class="btn btn-primary"
+          href="<%= edit_gossip_path(id: @gossip.id) %>"
+          role="button"
+          >Voir plus</a
+         >
+
+         <a
+          name=""
+          id=""
+          class="btn btn-secondary"
+          href="<%= root_path %>"
+          role="button"
+          >Retour</a>
+          </div>
      </div>
       </div>
     </div>
@@ -28,7 +47,7 @@
 
 </section>
 <%# COMMENTS %>
-<% comments = Comment.where(commented_gossip_id: gossip.id) %>
+<% comments = Comment.where(commented_gossip_id: @gossip.id) %>
 
 <section class='w3-light-grey' style="padding: 30px">
       <h3>Ajouter un commentaire</h3>

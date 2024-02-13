@@ -4,30 +4,34 @@ Rails.application.routes.draw do
   
   # ROOT
   root 'gossips#index'
+  get '/#:id', to: 'gossips#index', as: 'index'
 
 
   # PAGES STATIQUES
   get 'contact', to: 'static_pages#contact'
   get 'team', to: 'static_pages#team'
 
-  # GOSSIPS
-  get 'gossips/show'
-  get 'gossips/show/:id', to: 'gossips#show'
- 
-  get 'gossips/new'
-  post 'gossips/new', to: 'gossips#new'
-
-  get 'gossips/edit'
-  get 'gossips/edit/:id', to: 'gossips#edit'
-  post 'gossips/edit/:id', to: 'gossips#edit'
+  # GOSSIPS CRUD
+  resources :gossips, except: [:destroy]  do
+    resources :comments, only: [:index, :new, :create]
+  end
+  # # read
+  # get 'gossips/', to: 'gossips#index'
+  # get 'gossips/:id', to: 'gossips#show'
+  # # create
+  # get 'gossips/new', 'gossips#new'
+  # post 'gossips/', to: 'gossips#create'
+  # # update
+  # get 'gossips/:id/edit', to: 'gossips#edit'
+  # put 'gossips/:id', to: 'gossips#update'
+  # # destroy
+  # delete 'gossips/:id', to: 'gossips#destroy'
 
 
   # USERS 
   get 'users/welcome'
   get 'users/welcome/:first_name', to: 'users#welcome'
-  get 'users/show'
-  get 'users/show/:id', to: 'users#show'
-
+  resources :users, except: [:destroy]
 
 
 

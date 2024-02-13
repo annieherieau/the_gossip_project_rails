@@ -9,19 +9,36 @@
       </div>
     </div>
   </div>
-
   <%# content %>
   <div class="container overflow-hidden">
   <div class="row justify-content-md-center">
-  <% Gossip.all.each do |gossip| %>
+  <% @gossips_all.sort_by{|g| -g.id}.each do |gossip| %>
     <div class="card border-0 border-bottom border-primary shadow-sm overflow-hidden my-4" id="<%= gossip.id %>">
       <div class="card-body p-3">
         <h3><%= gossip.title %></h3>
-        <p><strong>Auteur : <a href="<%= users_show_path %>/<%= gossip.author.id %>"><%= gossip.author.first_name %></a></strong></p>
+        <p><strong>Auteur : <%= link_to "#{gossip.author.first_name}", user_path(gossip.author.id) %></strong></p>
         
         <p><%= gossip.content %></p>
-        <p>Potin n°<%= gossip.id %> - Commentaires : <%= Comment.where(commented_gossip_id: gossip.id).length %> - Likes : <%= Like.where(gossip_id: gossip.id).length %></p>
-        <p class="w3-center"><a href="<%= gossips_show_path %>/<%= gossip.id %>">Lire</a> - <a href="<%= gossips_edit_path %>/<%= gossip.id %>">Modifier</a></p>
+        <small>Potin n°<%= gossip.id %> - Commentaires : <%= Comment.where(commented_gossip_id: gossip.id).length %> - Likes : <%= Like.where(gossip_id: gossip.id).length %></small>
+        <!--LIENS -->
+        <div class="text-right">
+         <a
+          name=""
+          id=""
+          class="btn btn-primary"
+          href="<%= gossip_path(id: gossip.id) %>"
+          role="button"
+          >Voir plus</a
+         >
+
+         <a
+          name=""
+          id=""
+          class="btn btn-secondary"
+          href="<%= edit_gossip_path(id: gossip.id) %>"
+          role="button"
+          >Mofifier</a>
+          </div>
       </div>
     </div>
   <% end %>
