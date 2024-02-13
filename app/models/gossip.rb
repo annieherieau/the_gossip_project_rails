@@ -12,7 +12,7 @@ class Gossip < ApplicationRecord
   # todo hasm_many liking_user through likes
 
   # Validations
-  validates :title, presence: true, length: { in: 3..14 }
+  validates :title, presence: true, length: { in: 3..14}
   validates :content, presence: true
 
 

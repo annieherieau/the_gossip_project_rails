@@ -11,13 +11,23 @@ class GossipsController < ApplicationController
 
   def new
     # Méthode qui crée un potin vide et l'envoie à une view qui affiche le formulaire pour 'le remplir' (new.html.erb)
+    @gossip = Gossip.new
   end
 
   def create
     # Méthode qui créé un potin à partir du contenu du formulaire de new.html.erb, soumis par l'utilisateur
-    gossip = Gossip.create(author_id: params['author_id'].to_i, title: params['title'], content: params['content'])
-    # puts gossip.errors
-    redirect_to root_path if gossip.valid?
+    params['author_id'] = 1 if params['author_id'].to_i == 0
+
+    @gossip = Gossip.new(
+      author_id: params['author_id'].to_i, 
+      title: params['title'], 
+      content: params['content'])
+
+    if @gossip.save
+      redirect_to root_path
+    else
+      render "#{new_gossip_path(@gossip)}"
+    end
   end
 
   def edit

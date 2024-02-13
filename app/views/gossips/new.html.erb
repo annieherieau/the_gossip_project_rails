@@ -14,24 +14,32 @@
 
   <%# FORMULAIRE %>
   <div class="container">
-    <div class="container row justify-content-md-center"> 
-      <form action="<%= gossips_path %>" method = "POST">
+    <div class="container row justify-content-md-center">
+     <%# ALERTE FORMULAIRE %>
+      <% if @gossip && @gossip.errors.any? %>
+      <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
+        <% @gossip.errors.full_messages.each do |message| %>
+          <p class="alert alert-danger" role="alert"><%= message %></p>
+        <% end %>
+      <% end %>
+      <form action="<%= gossips_path(@gossip) %>" method = "POST">
       <%# authenticity token %>
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-        <input type="hidden" name="author_id" value="11">
+        <input type="hidden" name="author_id" value="">
         <label for="" class="form-label">Titre<sup>*</sup> :</label>
         <input
           type="text"
           name="title"
           id="title"
           required
+          value="<%= @gossip.title %>"
           class="form-control"
           placeholder=""
           aria-describedby="helpId"
         />
         <div class="mb-3">
           <label for="content" class="form-label">Contenu<sup>*</sup> :</label>
-          <textarea class="form-control" name="content" id="content" required rows="3"></textarea>
+          <textarea class="form-control" name="content" id="content" required rows="3"><%= @gossip.content %></textarea>
         </div>
         
     <br> <input
@@ -52,6 +60,7 @@
     <br>
     <small id="helpId" class="text-muted">* champs oblogatoires</small>
   </form>
+  
 </div>
 </div>
 </section>

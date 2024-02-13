@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
-  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   
   # ROOT
   root 'gossips#index'
-
 
   # PAGES STATIQUES
   get 'contact', to: 'static_pages#contact'
@@ -14,18 +12,6 @@ Rails.application.routes.draw do
   resources :gossips, except: [:destroy]  do
     resources :comments, only: [:index, :new, :create]
   end
-  # # read
-  # get 'gossips/', to: 'gossips#index'
-  # get 'gossips/:id', to: 'gossips#show'
-  # # create
-  # get 'gossips/new', 'gossips#new'
-  # post 'gossips/', to: 'gossips#create'
-  # # update
-  # get 'gossips/:id/edit', to: 'gossips#edit'
-  # put 'gossips/:id', to: 'gossips#update'
-  # # destroy
-  # delete 'gossips/:id', to: 'gossips#destroy'
-
 
   # USERS 
   get 'users/welcome'
