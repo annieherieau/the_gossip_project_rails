@@ -68,6 +68,6 @@ end
 
 gem "table_print", "~> 1.5"
 
-gem "faker", "~> 3.2"
+gem "faker", "~> 3.2", :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
 
 gem "pry", "~> 0.14.2"

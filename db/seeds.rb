@@ -32,7 +32,7 @@ puts '-- clear and reset tables: ok --'
 10.times do |i|
   City.create!(
     zip_code: Faker::Address.unique.zip_code,
-    name: Faker::Address.city 
+    name: Faker::Address.unique.city 
   )
 end
 puts '--- 10 cities ---'
@@ -59,8 +59,9 @@ end
 puts '--- 10 tags ---'
 
 20.times do |i|
+  
   g = Gossip.create!(
-    title: Faker::Lorem.words(number: rand(3..8)).join(' '),
+    title: Faker::Lorem.words(number: rand(2..3)).join(' ')[1..14],
     content: Faker::Lorem.paragraph(sentence_count: rand(5..12)),
     # foreign key
     author: User.all.sample
