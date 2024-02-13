@@ -9,8 +9,7 @@ Clone repository or launch in codespace.
 
 Install dépendencies
 ```bash
-  $ bundle install faker
-  $ bundle install table_print
+  $ bundle install
 ```
 Install Database : create tables and seed
 ```bash
@@ -25,4 +24,9 @@ To launch Rails console
 Print tables in Rails console
 ```bash
   tp City.all
+  tp User.all
+  tp Gossip.all
+  tp Comment.all
+  tp Tag.all
+
 ```
