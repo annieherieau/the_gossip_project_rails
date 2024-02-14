@@ -68,16 +68,17 @@
     <% if @comments.length> 0 %>
     <div>
       <h3>Tous les commentaires</h3>
-      <% @comments.each do |comment| %>
+      <% @comments.sort_by{|c| -c.id}.each do |comment| %>
         <div class="border-bottom">
         <p><strong><%= comment.commenting_user.first_name %></strong> :
-          <%= comment.content %>
+         <%= comment.content %>
           <br>
-          Likes : <%= Like.where(comment_id: comment.id).length%>
+          id: <%= comment.id %> - Likes : <%= Like.where(comment_id: comment.id).length%>
         </p>
         <div class="text-right my-3">
         <% if comment.commenting_user == @loged_user %>
-          <a class="btn btn-secondary" href="<%= edit_gossip_comment_path(comment) %>" role="button" >Modifier</a>
+          <a class="btn btn-secondary" href="<%= edit_gossip_comment_path(gossip_id: @gossip.id , id: comment.id) %>" role="button" >Modifier</a>
+        
           <% else %>
           todo : <a class="btn btn-secondary" href="<%=  %>" role="button" >Liker</a>
           todo : <a class="btn btn-secondary" href="<%=  %>" role="button" >Répondre</a>

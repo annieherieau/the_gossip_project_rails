@@ -12,20 +12,26 @@ class CommentsController < ApplicationController
     end
   end
   def edit
-    @comment = Comment.find(params[:gossip_id])
+    @gossip = Gossip.find(params[:gossip_id])
+    @comment = Comment.find(params[:id])
   end
 
   def update
-    @comment = Comment.find(params[:gossip_id])
+    @gossip = Gossip.find(params[:gossip_id])
+    @comment = Comment.find(params[:id])
     if @comment.update(content: params['content'])
-      redirect_to gossip_path(@comment.commented_gossip)
+      redirect_to gossip_path(@gossip)
     else
       render :edit
     end
   end
 
   def destroy
-
+    # Méthode qui récupère le potin concerné et le détruit en base
+    @gossip = Gossip.find(params[:gossip_id])
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    redirect_to gossip_path(@gossip), notice: 'Supprimé !'
   end
 
 end
