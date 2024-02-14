@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   get 'users/welcome/:id', to: 'users#welcome'
   resources :users, except: [:destroy]
 
+  # CITIES
+  resources :cities
+
 
 
   

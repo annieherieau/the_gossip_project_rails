@@ -1,5 +1,3 @@
-<% user = User.find(params[:id].to_s) %>
-<% city = user.city %>
 
 <!-- - Bootstrap Brain Component -->
 <section class="bg-light py-3 py-md-5 py-xl-8">
@@ -7,8 +5,8 @@
   <div class="container">
     <div class="container row justify-content-md-center"> 
       <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
-        <h1 class="mb-4 display-5 text-center">Profil Utilisateur n°<%= user.id %></h1>
-        <p class="text-secondary mb-5 text-center lead fs-4"> <%= user.first_name %> <%= user.last_name %></p>
+        <h1 class="mb-4 display-5 text-center"><%= @user.first_name %> <%= @user.last_name %></h1>
+        <p class="text-secondary mb-5 text-center lead fs-4"> </p>
       </div>
     </div>
   </div>
@@ -18,21 +16,54 @@
     <div class="row justify-content-md-center">
     <div class="card border-0 border-bottom border-primary shadow-sm overflow-hidden">
           <div class="card-body p-5">
-      <p><strong>Identifiant : </strong><%= user.id %></p>
-      <p><strong>Prénom : </strong><%= user.first_name %></p>
-      <p><strong>Nom : </strong><%= user.last_name %></p>
-      <p><strong>Âge : </strong><%= user.age %> ans</p>
-      <p><strong>Email : </strong><%= user.email %></p>
-      <p><strong>Ville : </strong><%= city.zip_code %> <%= city.name %></p>
-      <p><strong>Description : </strong><%= user.description %></p>
-      <p><strong>Nombre de Potins : </strong><%= Gossip.where(author_id: user.id).length %> </p>
-      <p><strong>Nombre de Commentaires : </strong><%= Comment.where(commenting_user_id: user.id).length %> </p>
-      <p><strong>Nombre de Likes : </strong><%= Like.where(user_id: user.id).length %> </p>
 
-      <p class=""><a href="<%= root_path %>">Retour</a></p>
-     </div>
+            <!-- @User Data -->
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><strong>Identifiant : </strong><%= @user.id %></li>
+              <li class="list-group-item"><strong>Prénom : </strong><%= @user.first_name %></li>
+              <li class="list-group-item"><strong>Nom : </strong><%= @user.last_name %></li>
+              <li class="list-group-item"><strong>Âge : </strong><%= @user.age %> ans</li>
+              <li class="list-group-item"><strong>Email : </strong><%= @user.email %></li>
+              <li class="list-group-item"><strong>Ville : </strong><%= @city.zip_code %> <%= @city.name %></li>
+              <li class="list-group-item"><strong>Description : </strong><%= @user.description %></li>
+              <li class="list-group-item"><strong>Nombre de Potins : </strong><%= @gossips.length %> </li>
+              <li class="list-group-item"><strong>Nombre de Commentaires : </strong><%= @comments.length %> </li>
+              <li class="list-group-item"><strong>Nombre de Likes : </strong><%= @likes.length %> </li>
+          </div>
       </div>
     </div>
+    <%# Liste des potins %>
+      <div class="accordion my-5 bg-light-blue">
+        <% @gossips.sort_by{|g| -g.id}.each do |gossip|%>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseOne"
+              aria-expanded="true"
+              aria-controls="flush-collapseOne"
+            >
+              <%= gossip.title %>
+            </button>
+          </h2>
+          <div
+            id="flush-collapseOne"
+            class="accordion-collapse collapse"
+            aria-labelledby="flush-headingOne"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body">
+              <%= gossip.content %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
   </div>
 
 </section>
+
+
+

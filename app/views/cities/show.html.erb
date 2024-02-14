@@ -4,11 +4,12 @@
   <div class="container">
     <div class="container row justify-content-md-center"> 
       <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
-        <h1 class="mb-4 display-5 text-center">The Gossip Project</h1>
-        <p class="text-secondary mb-5 text-center lead fs-4">Tous les potins les plus croustillants sont ici</p>
+        <h1 class="mb-4 display-5 text-center"><%= @city.name %></h1>
+        <p class="text-secondary mb-5 text-center lead fs-4"> </p>
       </div>
     </div>
   </div>
+
   <%# content %>
   <div class="container overflow-hidden">
     <div class="row justify-content-md-center">
@@ -19,7 +20,7 @@
             <h3><%= gossip.title %></h3>
             <p><strong>Auteur : <%= link_to "#{author.first_name}", user_path(author) %></strong>
             <br>
-            Ville : <%= link_to "#{author.city.name}", city_path(author.city) %> </p>
+            Ville : <%= @city.name %> </p>
             
             <p><%= gossip.content %></p>
             <small>Potin n°<%= gossip.id %> - Commentaires : <%= Comment.where(commented_gossip_id: gossip.id).length %> - Likes : <%= Like.where(gossip_id: gossip.id).length %></small>
@@ -40,4 +41,3 @@
       <% end %>
     </div>
   </div>
-</section>

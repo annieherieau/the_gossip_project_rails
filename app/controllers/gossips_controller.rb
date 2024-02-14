@@ -29,7 +29,7 @@ class GossipsController < ApplicationController
     if @gossip.save
       redirect_to root_path
     else
-      render "new"
+      render :new
     end
   end
 
@@ -44,7 +44,7 @@ class GossipsController < ApplicationController
     if @gossip.update(post_params)
       redirect_to root_path
     else
-      render "edit"
+      render :edit
     end
   end
 
