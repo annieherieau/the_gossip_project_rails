@@ -27,11 +27,11 @@
         <%= f.hidden_field :author_id, class: 'form-control'%>
         <%# Title %>
         <%= f.label :title, "Titre :", class: "form-label"%>
-        <%= f.text_field :title, class: 'form-control', value: @gossip.title %>
+        <%= f.text_field :title, required: true, class: 'form-control', value: @gossip.title %>
         <br>
         <%# Content %>
         <%= f.label :content, "Contenu :", class: "form-label"%>
-        <%= f.text_area :content, class: 'form-control', rows: 10, value: @gossip.content %>
+        <%= f.text_area :content, required: true, class: 'form-control', rows: 10, value: @gossip.content %>
         <%# Help text %>
         <small id="helpId" class="text-muted">* champs obligatoires</small>
         <br> 

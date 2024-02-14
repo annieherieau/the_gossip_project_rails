@@ -14,6 +14,10 @@ Rails.application.routes.draw do
     resources :comments, only: [:edit, :update, :destroy]
   end
 
+  #comments
+  get 'gossips/:id', to: 'comments#new', as: 'new_comment'
+  post 'gossips/:id', to: 'comments#create', as: 'create_comment'
+
   # USERS 
   get 'users/welcome'
   get 'users/welcome/:id', to: 'users#welcome'
