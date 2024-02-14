@@ -28,6 +28,15 @@ ActiveRecord::Base.connection.tables.each do |t|
 end
 puts '-- clear and reset tables: ok --'
 
+User.create!(
+  first_name: 'anonymous',
+  last_name: 'anonymous',
+  email: 'anonymous@anonymous.com',
+  age: 18,
+  city: City.create(zip_code: 'xxxxx', name: 'Inconnue'),
+  is_admin: false,
+)
+puts '--- 1 user anonymous in Inconnue city ---'
 
 10.times do |i|
   City.create!(
@@ -36,15 +45,6 @@ puts '-- clear and reset tables: ok --'
   )
 end
 puts '--- 10 cities ---'
-
-User.create!(
-  first_name: 'anonymous',
-  last_name: 'anonymous',
-  email: 'anonymous@anonymous.com',
-  age: 18,
-  is_admin: false,
-)
-puts '--- 1 user anonymous ---'
 
 10.times do |i|
   User.create!(

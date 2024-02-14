@@ -9,13 +9,13 @@ Rails.application.routes.draw do
   get 'team', to: 'static_pages#team'
 
   # GOSSIPS CRUD
-  resources :gossips, except: [:destroy]  do
+  resources :gossips  do
     resources :comments, only: [:index, :new, :create]
   end
 
   # USERS 
   get 'users/welcome'
-  get 'users/welcome/:first_name', to: 'users#welcome'
+  get 'users/welcome/:id', to: 'users#welcome'
   resources :users, except: [:destroy]
 
 
