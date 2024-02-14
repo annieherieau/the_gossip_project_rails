@@ -38,8 +38,17 @@
  
        <div class="text-right my-3">
           <% if @author == @loged_user %>
+            <%#  SUPPRIMER %>
             <%= form_with(url: gossip_path(@gossip), method: "delete") do |f| %>
               <%= f.button "Supprimer", data: { confirm: "Are you sure?" }, class: "btn btn-danger mx-1" %>
+            <% end %>
+          <% else %>
+           <%# LIKE %>
+            <% @already_liked = Like.where(user_id: @loged_user.id, gossip_id: @gossip.id).length %>
+            <% @already_liked.zero? ? button_class ="btn btn-outline-success" : button_class ="btn btn-success" %>
+            <% @already_liked.zero? ? like_txt ="Like" : like_txt ="Unlike"  %>
+            <%= form_with url: likes_path(gossip_id: @gossip.id, user_id: @loged_user.id), action: 'create', method: "post", class:"d-inline ml-2" do |f| %>
+              <%= f.submit value: like_txt, class: button_class %>
             <% end %>
           <% end %>
         </div>

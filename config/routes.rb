@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   
   # ROOT
@@ -14,7 +13,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:edit, :update, :destroy]
   end
 
-  #comments
+  # COMMENTS
   post 'gossips/:id', to: 'comments#create', as: 'create_comment'
 
   # USERS 
@@ -24,6 +23,9 @@ Rails.application.routes.draw do
 
   # CITIES
   resources :cities
+
+  # LIKES
+  resources :likes, only: [:create, :destroy]
 
 
 
