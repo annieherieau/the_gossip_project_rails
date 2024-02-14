@@ -48,14 +48,16 @@ class GossipsController < ApplicationController
     end
   end
 
-  def post_params
-    post_params = params.require(:gossip).permit(:title, :content)
-  end
-
   def destroy
     # Méthode qui récupère le potin concerné et le détruit en base
     @gossip = Gossip.find(params[:id])
     @gossip.destroy
-    redirect_to root_path
+    redirect_to root_path, notice: 'Supprimé !'
   end
+
+  private
+  def post_params
+    post_params = params.require(:gossip).permit(:title, :content)
+  end
+
 end

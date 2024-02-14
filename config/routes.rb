@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'team', to: 'static_pages#team'
 
   # GOSSIPS CRUD
-  resources :gossips  do
+  resources :gossips do
     resources :comments, only: [:index, :new, :create]
   end
 
