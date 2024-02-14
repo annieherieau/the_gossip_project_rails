@@ -10,6 +10,7 @@
     </div>
   </div>
   <%# content %>
+  <p class="text-center"> ( User connecté : [<%= @loged_user.id %>] <%= @loged_user.first_name %> ) </p>
   <div class="container overflow-hidden">
     <div class="row justify-content-md-center">
       <% @gossips_all.each do |gossip| %>
@@ -28,7 +29,7 @@
             <a class="btn btn-primary" href="<%= gossip_path(gossip) %>" 
               role="button"
                 >Lire</a>
-              <% if gossip.author == @user %>
+              <% if gossip.author == @loged_user %>
                 <a class="btn btn-secondary"
                   href="<%= edit_gossip_path(gossip) %>"
                   role="button"

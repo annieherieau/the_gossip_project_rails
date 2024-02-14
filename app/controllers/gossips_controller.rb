@@ -1,14 +1,16 @@
 class GossipsController < ApplicationController
+ 
   def index
     # Méthode qui récupère tous les potins et les envoie à la view index (index.html.erb) pour affichage
-    @user = User.find(1)
+    @loged_user = ApplicationController.new.loged_user
     @gossips_all = Gossip.all.sort_by{|g| -g.id}
   end
 
   def show
     # Méthode qui récupère le potin concerné et l'envoie à la view show (show.html.erb) pour affichage
-    @user = User.find(1)
+    @loged_user = ApplicationController.new.loged_user
     @gossip = Gossip.find(params[:id])
+    @author = @gossip.author
     @comments = Comment.where(commented_gossip_id: @gossip.id) 
   end
 

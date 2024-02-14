@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
-  @user = User.find(1)
+  def loged_user
+    @loged_user = User.find(7)
+  end
 
 end

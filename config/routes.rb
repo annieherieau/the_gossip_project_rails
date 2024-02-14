@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   
   # ROOT
@@ -10,7 +11,7 @@ Rails.application.routes.draw do
 
   # GOSSIPS CRUD
   resources :gossips do
-    resources :comments, only: [:index, :new, :create]
+    resources :comments, only: [:edit, :update, :destroy]
   end
 
   # USERS 

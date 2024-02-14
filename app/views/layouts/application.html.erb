@@ -42,8 +42,8 @@
                 <a class="nav-link" href="<%=contact_path%>">Contact</a>
               </li>
               <li class="nav-item">
-              <% user = User.find(1) %>
-                <a class="nav-link active" href="<%=users_welcome_path%>/<%= user.id%>">: WELCOME <%= user.first_name%> :</a>
+              <% @loged_user = ApplicationController.new.loged_user %>
+                <a class="nav-link active" href="<%=users_welcome_path%>/<%= @loged_user.id%>">: WELCOME <%= @loged_user.first_name%> :</a>
               </li>
           </ul>
         </div>

@@ -6,23 +6,24 @@
     <div class="container row justify-content-md-center"> 
       <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
         <h1 class="mb-4 display-5 text-center"><%=  @gossip.title %></h1>
-        <p class="text-secondary text-center lead fs-4"><strong>Auteur :</strong> <%= link_to "#{@gossip.author.first_name}", user_path(@gossip.author) %></p>
+        <p class="text-secondary text-center lead fs-4"><strong>Auteur :</strong> <%= link_to "#{@author.first_name}", user_path(@author) %></p>
       </div>
     </div>
   </div>
   <%# Ville %>
-  <p class="text-center mb-5">Ville : <%= @gossip.author.city ? @gossip.author.city.name : 'Inconnue' %></p>
+  <p class="text-center mb-5">Ville : <%= link_to "#{@author.city.name}", city_path(@author.city) %></p>
 
   <%# content %>
   <div class="container overflow-hidden  mb-5 ">
     <div class="row justify-content-md-center">
       <%# LIENS %>
       <div class="flex">
-      <div class="text-right my-3">
-        <% if @gossip.author == @user %>
-          <a class="btn btn-primary" href="<%= edit_gossip_path(@gossip) %>" role="button" >Modifier</a>
-        <% end %>
-        <a class="btn btn-secondary ml-2" href="<%= root_path %>" role="button">Retour</a></div>
+        <div class="text-right my-3">
+          <% if @gossip.author == @user %>
+            <a class="btn btn-primary" href="<%= edit_gossip_path(@gossip) %>" role="button" >Modifier</a>
+          <% end %>
+          <a class="btn btn-secondary ml-2" href="<%= root_path %>" role="button">< Retour</a>
+        </div>
       </div>
       <%# CARD %>
       <div class="card border-0 border-bottom border-primary shadow-sm overflow-hidden">
@@ -36,7 +37,7 @@
 
  
        <div class="text-right my-3">
-          <% if @gossip.author == @user %>
+          <% if @author == @loged_user %>
             <%= form_with(url: gossip_path(@gossip), method: "delete") do |f| %>
               <%= f.button "Supprimer", data: { confirm: "Are you sure?" }, class: "btn btn-danger mx-1" %>
             <% end %>
@@ -48,19 +49,58 @@
 <%# COMMENTS %>
 
 <section class='w3-light-grey' style="padding: 30px">
-      <h3>Ajouter un commentaire</h3>
+    <h3>Ajouter un commentaire</h3>
      
-    <hr>
+     <%# ALERTE FORMULAIRE %>
+      <% if @gossip && @gossip.errors.any? %>
+      <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
+        <% @gossip.errors.full_messages.each do |message| %>
+          <p class="alert alert-danger" role="alert"><%= message %></p>
+        <% end %>
+      <% end %>
+      <%# FORMULAIRE %>
+      <%= form_with url: gossips_path, action: 'create', method: "post"  do |f| %>
+        <%# Author %> 
+        <%= f.hidden_field :author_id, class: 'form-control'%>
+        <%# Title %>
+        <%= f.label :title, "Titre :", class: "form-label"%>
+        <%= f.text_field :title, class: 'form-control', value: @gossip.title %>
+        <br>
+        <%# Content %>
+        <%= f.label :content, "Contenu :", class: "form-label"%>
+        <%= f.text_area :content, class: 'form-control', rows: 10, value: @gossip.content %>
+        <%# Help text %>
+        <small id="helpId" class="text-muted">* champs obligatoires</small>
+        <br> 
+        <%# Boutons %>
+        <div class="text-right">
+          <%# Submit %>
+          <%= f.submit value: "Valider", class: "btn btn-primary" %>
+          <%# Retour %>
+          <a class="btn btn-secondary" href="<%= root_path %>" role="button" >Annuler</a>
+        </div>
+      <% end %>
+      
     <%# TOUS LES COMMENTAIRES %>
     <% if @comments.length> 0 %>
-    <section>
+    <div>
       <h3>Tous les commentaires</h3>
       <% @comments.each do |comment| %>
-        <p><strong><%= comment.commenting_user.first_name %></strong> : <br>
+        <div class="border-bottom">
+        <p><strong><%= comment.commenting_user.first_name %></strong> :
           <%= comment.content %>
           <br>
           Likes : <%= Like.where(comment_id: comment.id).length%>
         </p>
+        <div class="text-right my-3">
+        <% if comment.commenting_user == @loged_user %>
+          <a class="btn btn-secondary" href="<%= edit_gossip_comment_path(comment) %>" role="button" >Modifier</a>
+          <% else %>
+          todo : <a class="btn btn-secondary" href="<%=  %>" role="button" >Liker</a>
+        <% end %>
+        todo : <a class="btn btn-secondary" href="<%=  %>" role="button" >Répondre</a>
+        </div>
+      </div>
       <% end %>
     </section>
     <% end %>
