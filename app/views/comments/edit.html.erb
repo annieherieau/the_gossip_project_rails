@@ -1,2 +1,16 @@
-<h1>Comments#edit</h1>
-<p>Find me in app/views/comments/edit.html.erb</p>
+
+
+
+
+ <%# FORMULAIRE COMMENTAIRE%>
+      <%= form_with url: gossip_comment_path(content: params['content']), action: 'update', method: "patch"  do |f| %>
+        <%# Content %>
+        <%= f.label :content, "Contenu :", class: "form-label"%>
+        <%= f.text_area :content, required: true, class: 'form-control', rows: 2, value: @comment.content %>
+        <br> 
+        <%# Boutons %>
+        <div class="text-right">
+          <%# Submit %>
+          <%= f.submit value: "Valider", class: "btn btn-primary" %>
+        </div>
+      <% end %>

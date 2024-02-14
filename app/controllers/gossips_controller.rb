@@ -21,10 +21,10 @@ class GossipsController < ApplicationController
 
   def create
     # Méthode qui créé un potin à partir du contenu du formulaire de new.html.erb, soumis par l'utilisateur
-    params['author_id'] = 1 if params['author_id'].to_i == 0
+
     # TODO  post_params
     @gossip = Gossip.new(
-      author_id: params['author_id'].to_i, 
+      author: ApplicationController.new.loged_user, 
       title: params['title'], 
       content: params['content'])
 

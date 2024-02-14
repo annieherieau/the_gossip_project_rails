@@ -1,8 +1,5 @@
 class CommentsController < ApplicationController
-  def new
-    @gossip = Gossip.find(params[:id])
-    
-  end
+
   def create
     @gossip = Gossip.find(params[:id])
     @comment = Comment.new(
@@ -15,12 +12,20 @@ class CommentsController < ApplicationController
     end
   end
   def edit
+    @comment = Comment.find(params[:gossip_id])
   end
 
   def update
+    @comment = Comment.find(params[:gossip_id])
+    if @comment.update(content: params['content'])
+      redirect_to gossip_path(@comment.commented_gossip)
+    else
+      render :edit
+    end
   end
 
   def destroy
 
   end
+
 end

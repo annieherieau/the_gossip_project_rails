@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   end
 
   #comments
-  get 'gossips/:id', to: 'comments#new', as: 'new_comment'
   post 'gossips/:id', to: 'comments#create', as: 'create_comment'
 
   # USERS 
