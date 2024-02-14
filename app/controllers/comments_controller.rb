@@ -12,8 +12,6 @@ class CommentsController < ApplicationController
       )
     if @comment.save
       redirect_to gossip_path(@gossip)
-    else
-      params['error'] = 'erreur'
     end
   end
   def edit

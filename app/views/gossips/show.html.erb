@@ -51,21 +51,11 @@
 <section class='w3-light-grey' style="padding: 30px">
     <h3>Ajouter un commentaire</h3>
      
-     <%# ALERTE FORMULAIRE %>
-      <% if @comment && @comment.errors.any? %>
-      <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
-        <% @comment.errors.full_messages.each do |message| %>
-          <p class="alert alert-danger" role="alert"><%= message %></p>
-        <% end %>
-      <% end %>
-      <%# FORMULAIRE %>
-      <%= params['error']%>
+      <%# FORMULAIRE COMMENTAIRE%>
       <%= form_with url: create_comment_path, action: 'create', method: "post"  do |f| %>
         <%# Content %>
         <%= f.label :content, "Contenu :", class: "form-label"%>
         <%= f.text_area :content, required: true, class: 'form-control', rows: 2 %>
-        <%# Help text %>
-        <small id="helpId" class="text-muted">* champs obligatoires</small>
         <br> 
         <%# Boutons %>
         <div class="text-right">
@@ -90,8 +80,9 @@
           <a class="btn btn-secondary" href="<%= edit_gossip_comment_path(comment) %>" role="button" >Modifier</a>
           <% else %>
           todo : <a class="btn btn-secondary" href="<%=  %>" role="button" >Liker</a>
+          todo : <a class="btn btn-secondary" href="<%=  %>" role="button" >Répondre</a>
         <% end %>
-        todo : <a class="btn btn-secondary" href="<%=  %>" role="button" >Répondre</a>
+        
         </div>
       </div>
       <% end %>
