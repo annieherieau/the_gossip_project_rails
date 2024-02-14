@@ -48,17 +48,16 @@
 
 </section>
 <%# COMMENTS %>
-<% comments = Comment.where(commented_gossip_id: @gossip.id) %>
 
 <section class='w3-light-grey' style="padding: 30px">
       <h3>Ajouter un commentaire</h3>
      
     <hr>
     <%# TOUS LES COMMENTAIRES %>
-    <% if comments.length> 0 %>
+    <% if @comments.length> 0 %>
     <section>
       <h3>Tous les commentaires</h3>
-      <% comments.each do |comment| %>
+      <% @comments.each do |comment| %>
         <p><strong><%= comment.commenting_user.first_name %></strong> : <br>
           <%= comment.content %>
           <br>

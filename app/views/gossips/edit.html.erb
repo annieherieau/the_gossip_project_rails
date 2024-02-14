@@ -1,36 +1,52 @@
-<% gossip = Gossip.find(params[:id].to_s) %>
-
 <!-- - Bootstrap Brain Component -->
 <section class="bg-light py-3 py-md-5 py-xl-8">
   <%# TITRE %>
   <div class="container">
     <div class="container row justify-content-md-center"> 
       <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
-        <h1 class="mb-4 display-5 text-center">Modifier le gossip n°<%= gossip.id %></h1>
-        <p class="text-secondary mb-5 text-center lead fs-4">Ce potin est dépassé, erroné ou incomplet ?
-        <br>Modifie-le dans le formulaire ci-dessous:</p>
+        <h1 class="mb-4 display-5 text-center">Créer un nouveau gossip</h1>
+        <p class="text-secondary mb-5 text-center lead fs-4">Tu as un nouveau potin croustillant ?
+          <br>Écris le vite dans le formulaire ci-dessous :</p>
       </div>
     </div>
   </div>
+  <%# CONTENU %>
+  <div class="container">
+    <div class="container row justify-content-md-center">
+     <%# ALERTE FORMULAIRE %>
+      <% if @gossip && @gossip.errors.any? %>
+      <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
+        <% @gossip.errors.full_messages.each do |message| %>
+          <p class="alert alert-danger" role="alert"><%= message %></p>
+        <% end %>
+      <% end %>
+      
+      <%# FORMULAIRE %>
+      <%= form_with(model: @gossip) do |f| %>
+        <%# authenticity token %>
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <%# Author %>
+        <input type="hidden" name="author_id" value="">
+        <%# Title %>
+        <label for="" class="form-label">Titre<sup>*</sup> :</label>
+        <%= f.text_field :title, class: 'form-control' %>
+        <br>
+        <%# Content %>
+        <label for="content" class="form-label">Contenu<sup>*</sup> :</label>
+        <%= f.text_area :content, class: 'form-control', rows: 10 %>
+        <%# Help text %>
+        <small id="helpId" class="text-muted">* champs obligatoires</small>
+        <br> 
+        <%# Boutons %>
+        <div class="text-right">
+          <%# Submit %>
+          
+          <%# Retour %>
+          <a name="" id="" class="btn btn-secondary" href="<%= root_path %>" role="button" >Annuler</a>
+        </div>
+      <% end %>
 
-    <%# FORMULAIRE %>
-  <% author = gossip.author %>
-  <form action="<%= gossips_edit_path %>" method = "POST" class='w3-light-grey' style="padding: 30px">
-    <label for="author_id">*Auteur : </label> 
-    <input required type="hidden" name="author_id" value="<%= author.id %>" id="author_id"> [<%= author.id %>] <%= author.first_name %> <%= author.last_name %>
-    <br>
-    <label for="title">*Titre : </label> 
-    <br>
-    <input required type="text" name ="title" id="title" value="<%= gossip.title %>">
-    <br>
-    <br>
-    <label for="content">*Balance ton potin : </label><br>
-    <textarea required name="content" id="content" cols="60" rows="10"><%= gossip.content %></textarea>
-    <br><br>
-    <input type="submit" class="w3-button w3-blue" value="Enregister">
-    <a href="<%= root_path %>"><input type="button" value="Annuler" class="w3-button w3-dark-grey"></a>
-    <br>
-    <small>* champs oblogatoires</small>
-  </form>
 
+    </div>
+  </div>
 </section>
