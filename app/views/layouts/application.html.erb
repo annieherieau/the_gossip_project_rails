@@ -41,13 +41,25 @@
              <li class="nav-item">
                 <a class="nav-link" href="<%=contact_path%>">Contact</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<%=new_user_path%>">Inscription</a>
-              </li>
-              <li class="nav-item">
-              <% @loged_user = ApplicationController.new.loged_user %>
-                <a class="nav-link active" href="<%=users_welcome_path%>/<%= @loged_user.id%>">: WELCOME <%= @loged_user.first_name%> :</a>
-              </li>
+              <% if logged_in? %>
+                <li class="nav-item">
+                  <a class="nav-link active" href="<%=users_welcome_path%>/<%= current_user.id %>">WELCOME <%= current_user.first_name %></a>
+                </li>
+                <li class="nav-item">
+                 <%= form_with url: session_path(id: current_user.id, first_name: current_user.first_name), action: 'destroy', method: "delete", class:"d-inline ml-2" do |f| %>
+                  <%= f.submit value: 'Déconnexion', class: "nav-link" %>
+                  <%= link_to "Delete", session_path(current_user), data: { method: :delete } %>
+                <% end %>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <a class="nav-link" href="<%=new_user_path%>">Inscription</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="<%=new_session_path%>">Connexion</a>
+                </li>
+              <%end%>
+
           </ul>
         </div>
       </div>

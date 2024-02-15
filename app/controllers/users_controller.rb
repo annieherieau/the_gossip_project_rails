@@ -1,14 +1,12 @@
-
 class UsersController < ApplicationController
+
+
   def welcome
-    @user = User.find(params[:id])
-  end
-  
-  def index
+    if logged_in? @user = current_user
   end
 
   def show
-    @user = User.find(params[:id])
+    if logged_in? @user = current_user
     @city = @user.city
     @gossips = Gossip.where(author_id: @user.id)
     @comments = Comment.where(commenting_user_id: @user.id)
@@ -20,8 +18,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    
-
     @user = User.new(
       first_name: params['first_name'],
       last_name: params['last_name'],
@@ -31,26 +27,20 @@ class UsersController < ApplicationController
       description: params['description'],
       is_admin: false
     )
-    @user.city = params['city_id'].to_i unless params['city_id'].to_i.zero?
+    @user.city_id = params['city_id'].to_i unless params['city_id'].to_i.zero?
     # @_errors = []
     # confirmation du mot de passe?
+    #flash.now[:danger] = 'Invalid email/password combination'
     # @user.password = params[:password]
     # @_errors.push(is_password_valid?) unless is_password_valid?
     # @_errors.push(is_password_confirmed?) unless is_password_confirmed?
 
     if @user.save
+      login(@user)
       redirect_to root_path
     else
       render :new
     end
-  end
-
-  def is_password_confirmed?
-    params['password']==params['password_confirma'] ? 'Mots de passe non indentiques' : false
-  end
-
-  def is_password_valid?
-    params['password'].length >=8 ? 'Mot de passe de 8 caractères minimum' : false
   end
 
   def edit

@@ -24,17 +24,19 @@
             
             <p><%= gossip.content %></p>
             <small>Potin n°<%= gossip.id %> - Commentaires : <%= Comment.where(commented_gossip_id: gossip.id).length %> - Likes : <%= Like.where(gossip_id: gossip.id).length %></small>
-            <!--LIENS -->
-            <div class="text-right">
-            <a class="btn btn-primary" href="<%= gossip_path(gossip) %>" 
-              role="button"
-                >Lire</a>
-              <% if gossip.author == @user %>
-                <a class="btn btn-secondary"
-                  href="<%= edit_gossip_path(gossip) %>"
-                  role="button"
-                  >Mofifier</a>
-              <% end %>
+            <% if logged_in? %>
+              <!--LIENS -->
+              <div class="text-right">
+              <a class="btn btn-primary" href="<%= gossip_path(gossip) %>" 
+                role="button"
+                  >Lire</a>
+                <% if gossip.author == current_user %>
+                  <a class="btn btn-secondary"
+                    href="<%= edit_gossip_path(gossip) %>"
+                    role="button"
+                    >Mofifier</a>
+                <% end %>
+              <%end%>
               </div>
           </div>
         </div>

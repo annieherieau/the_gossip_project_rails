@@ -1,2 +1,42 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<!-- - Bootstrap Brain Component -->
+<section class="bg-light py-3 py-md-5 py-xl-8">
+  <%# TITRE %>
+  <div class="container">
+    <div class="container row justify-content-md-center"> 
+      <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+        <h1 class="mb-4 display-5 text-center">Login</h1>
+        <p class="text-secondary mb-5 text-center lead fs-4">Identifiants de connexion :</p>
+      </div>
+    </div>
+  </div>
+
+  <%# CONTENU %>
+  <div class="container">
+    <div class="container row justify-content-md-center">
+      <%# ALERTE FORMULAIRE %>
+      <% if @user && @user.errors.any? %>
+        <p>Nous n'avons pas réussi à créer ton compte pour la (ou les) raison(s) suivante(s) :</p>
+        <% @user.errors.full_messages.each do |message| %>
+          <p class="alert alert-danger" role="alert"><%= message %></p>
+        <% end %>
+      <% end %>
+
+      <%# FORMULAIRE %>
+      <%= form_with url: sessions_path, action: 'create', method: "post"  do |f| %>
+        <%# email %>
+        <% @user.email ? u_email = @user.email : u_email= '' %>
+        <%= f.label :email, "Email :", class: "form-label"%>
+        <%= f.email_field :email, required: true, class: 'form-control', value: u_email %>
+        <%# password %>
+        <%= f.label :input_pwd, "Mot de passe :", class: "form-label"%>
+        <%= f.password_field :input_pwd, required: true, class: 'form-control' %>
+        <br>
+        <%# Boutons %>
+        <div class="text-right">
+          <%# Submit %>
+          <%= f.submit value: "Valider", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

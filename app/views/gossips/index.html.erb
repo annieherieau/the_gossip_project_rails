@@ -11,7 +11,9 @@
   </div>
 
   <%# content %>
-  <p class="text-center"> ( User connecté : [<%= @loged_user.id %>] <%= @loged_user.first_name %> ) </p>
+  <% if logged_in? %>
+    <p class="text-center"> Bonjour :  <%= current_user.first_name %> [<%= current_user.id %>]  </p>
+  <%end%>
   <div class="container overflow-hidden">
     <div class="row justify-content-md-center">
       <% @gossips_all.each do |gossip| %>
@@ -28,11 +30,12 @@
              </div>
             <p><%= gossip.content %></p>
             <small>Potin n°<%= gossip.id %> - Commentaires : <%= Comment.where(commented_gossip_id: gossip.id).length %> - Likes : <%= Like.where(gossip_id: gossip.id).length %></small>
-            <!--LIENS -->
             
+            <% if logged_in? %>
+            <!--LIENS -->
             <div class="text-right">
               <%# MODIFIER %>
-              <% if gossip.author == @loged_user %>
+              <% if gossip.author ==  current_user %>
                 <a class="btn btn-secondary ml-2"
                   href="<%= edit_gossip_path(gossip) %>"
                   role="button"
@@ -40,10 +43,10 @@
                   
               <% else %>
                 <%# LIKE %>
-                <% @already_liked = Like.where(user_id: @loged_user.id, gossip_id: gossip.id).length %>
+                <% @already_liked = Like.where(user_id: current_user.id, gossip_id: gossip.id).length %>
                 <% @already_liked.zero? ? button_class ="btn btn-outline-success" : button_class ="btn btn-success" %>
                 <% @already_liked.zero? ? like_txt ="Like" : like_txt ="Unlike"  %>
-                <%= form_with url: likes_path(gossip_id: gossip.id, user_id: @loged_user.id), action: 'create', method: "post", class:"d-inline ml-2" do |f| %>
+                <%= form_with url: likes_path(gossip_id: gossip.id, user_id: current_user.id), action: 'create', method: "post", class:"d-inline ml-2" do |f| %>
                   <%= f.submit value: like_txt, class: button_class %>
                 <% end %>
               <% end %>
@@ -53,7 +56,9 @@
               role="button"
                 >Lire</a>
               </div>
+            <% end %>
           </div>
+          
         </div>
       <% end %>
     </div>

@@ -1,14 +1,15 @@
 class GossipsController < ApplicationController
  
+ 
   def index
     # Méthode qui récupère tous les potins et les envoie à la view index (index.html.erb) pour affichage
-    @loged_user = ApplicationController.new.loged_user
+    @user = current_user
     @gossips_all = Gossip.all.sort_by{|g| -g.id}
   end
 
   def show
     # Méthode qui récupère le potin concerné et l'envoie à la view show (show.html.erb) pour affichage
-    @loged_user = ApplicationController.new.loged_user
+    @user = User.find(session[:user_id])
     @gossip = Gossip.find(params[:id])
     @author = @gossip.author
     @comments = Comment.where(commented_gossip_id: @gossip.id) 
@@ -24,11 +25,12 @@ class GossipsController < ApplicationController
 
     # TODO  post_params
     @gossip = Gossip.new(
-      author: ApplicationController.new.loged_user, 
+      author: current_user, 
       title: params['title'], 
       content: params['content'])
 
     if @gossip.save
+      flash[:success] = "Potin bien créé !"
       redirect_to root_path
     else
       render :new
@@ -40,7 +42,7 @@ class GossipsController < ApplicationController
   end
 
   def update
-    # Méthode qui met à jour le potin 
+    # Méthode qui met à jour le potin
     @gossip = Gossip.find(params[:id])
     
     if @gossip.update(post_params)
