@@ -19,6 +19,14 @@ class UsersController < ApplicationController
   end
 
   def create
+    @user = User.new(params[:user])
+    # confirmation du mot de passe?
+    @user.password = params[:password]
+    if @user.save!
+
+    else
+      
+    end
   end
 
   def edit
