@@ -1,3 +1,5 @@
+
+
 class User < ApplicationRecord
   # table N-1
   belongs_to :city, optional: true
@@ -12,8 +14,15 @@ class User < ApplicationRecord
   has_many :likes
   # todo: has_many liked comments/gossip through
 
+  # Bcrypt
+  # users.password_hash in the database is a :string
+  # include BCrypt
+  # has_secure_password
+  # has_secure_password :recovery_password, validations: false
+
   # validations
   validates :first_name, :last_name, presence: true
   validates :email, presence: true, uniqueness: true
   validates :age, numericality: { only_integer: true, greater_than_or_equal_to: 18 }
+  validates :password, presence: true, length: { minimum: 8 }
 end

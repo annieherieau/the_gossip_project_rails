@@ -10,6 +10,7 @@
 require 'faker'
 Faker::Config.locale='fr'
 Faker::UniqueGenerator.clear
+require 'bcrypt'
 
 puts '----- start seed ------'
 City.destroy_all
@@ -41,6 +42,7 @@ puts '--- 10 cities ---'
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.unique.email,
+    password_digest: BCrypt::Password.create("#{Faker::Lorem.characters[1..rand(8..16)]}"),
     age: rand(18..90),
     description: Faker::Lorem.paragraph(sentence_count: rand(2..4)),
     is_admin: false,
