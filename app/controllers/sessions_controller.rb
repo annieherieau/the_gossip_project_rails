@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params['id'])
     session.delete(:user_id)
     # redirect_to session_path, status: :see_other
   end

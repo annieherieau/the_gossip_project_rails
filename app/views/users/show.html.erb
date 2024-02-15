@@ -43,8 +43,8 @@
           <h3><%= gossip.title %></h3>
           <p><%= gossip.content %></p>
           <small>Potin n°<%= gossip.id %> - 
-            Commentaires : <%= Comment.where(commented_gossip_id: gossip.id).length %> 
-            - Likes : <%= Like.where(gossip_id: gossip.id).length %></small>
+            Commentaires : <%= find_gossip_comments(gossip.id).length %> 
+            - Likes : <%= find_gossip_likes(gossip.id).length %></small>
         </div>
       </div>
         <% end %>

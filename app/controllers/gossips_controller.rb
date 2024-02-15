@@ -60,6 +60,8 @@ class GossipsController < ApplicationController
     redirect_to root_path, notice: 'Supprimé !'
   end
 
+  
+
   private
   def post_params
     post_params = params.require(:gossip).permit(:title, :content)
