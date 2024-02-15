@@ -37,8 +37,8 @@
       <% if logged_in? %>
        <div class="text-right my-3">
           <% if @author == current_user %>
-            <%#  SUPPRIMER %>
-            <%= form_with(url: gossip_path(@gossip), method: "delete") do |f| %>
+           <%#  SUPPRIMER %>
+             <%= form_with(url: gossip_path(@gossip), method: "delete") do |f| %>
               <%= f.button "Supprimer", data: { confirm: "Are you sure?" }, class: "btn btn-danger mx-1" %>
             <% end %>
           <% else %>
@@ -93,8 +93,8 @@
           <a class="btn btn-secondary" href="<%= edit_gossip_comment_path(gossip_id: @gossip.id , id: comment.id) %>" role="button" >Modifier</a>
         
           <% else %>
-          todo : <a class="btn btn-secondary" href="<%=  %>" role="button" >Liker</a>
-          todo : <a class="btn btn-secondary" href="<%=  %>" role="button" >Répondre</a>
+          <!--todo : <a class="btn btn-secondary" href="<%=  %>" role="button" >Liker</a>
+          todo : <a class="btn btn-secondary" href="<%=  %>" role="button" >Répondre</a>-->
         <% end %>
         
         </div>

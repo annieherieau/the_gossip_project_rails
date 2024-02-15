@@ -25,18 +25,16 @@
         <div class="text-right">
           <%# Submit %>
           <%= f.submit value: "Valider", class: "btn btn-primary" %>
-          <%# Retour %>
-          <a name="" id="" class="btn btn-secondary" href="<%= gossip_path(params['gossip_id']) %>" role="button" >Annuler</a>
-        </div>
-        
-      <% end %>
-      <div class="text-center">
-        <%= form_with(url: gossip_comment_path(gossip_id: @gossip.id , id: @comment.id), method: "delete") do |f| %>
+          
+          <%= form_with(url: gossip_comment_path(gossip_id: @gossip.id , id: @comment.id), method: "delete") do |f| %>
           <%= f.button "Supprimer", data: { confirm: "Are you sure?" }, class: "btn btn-danger mx-1" %>
        <% end %>
+       <%# Retour %>
+          <a name="" id="" class="btn btn-secondary" href="<%= gossip_path(params['gossip_id']) %>" role="button" >Annuler</a>
+      <% end %>
+  
+        
       </div>
-      
-
 
     </div>
   </div>

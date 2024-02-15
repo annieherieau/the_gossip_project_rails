@@ -47,6 +47,10 @@
           <%# Submit %>
           <%= f.submit value: "Valider", class: "btn btn-primary" %>
           <%# Retour %>
+          <%#  SUPPRIMER %>
+             <%= form_with(url: gossip_path(@gossip), method: "delete") do |f| %>
+              <%= f.button "Supprimer", data: { confirm: "Are you sure?" }, class: "btn btn-danger mx-1" %>
+            <% end %>
           <a name="" id="" class="btn btn-secondary" href="<%= root_path %>" role="button" >Annuler</a>
         </div>
       <% end %>
