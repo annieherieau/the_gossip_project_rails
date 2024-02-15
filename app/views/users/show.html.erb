@@ -36,7 +36,6 @@
         </div>
     </div>
     <%# Liste des potins %>
-
         <% @gossips.sort_by{|g| -g.id}.each do |gossip|%>
       <div class="card border-0 border-bottom border-primary shadow-sm overflow-hidden my-4" >
         <div class="card-body p-3">
@@ -49,8 +48,6 @@
       </div>
         <% end %>
       </div>
-
-
 </section>
 
 

@@ -30,33 +30,34 @@
         <div class="collapse navbar-collapse" id="navbarsExample07">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="<%=root_path%>">Accueil</a>
+              <%= link_to 'Accueil', root_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<%=team_path%>">Team</a>
+              <%= link_to 'Team', team_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<%=contact_path%>">Contact</a>
+              <%= link_to 'Contact', contact_path, class: "nav-link" %>
             </li>
             <% if logged_in? %>
-            
               <li class="nav-item">
-                <a class="nav-link" href="<%=new_gossip_path%>">Ajouter un Gossip</a>
+                <%= link_to 'Ajouter un Gossip', new_gossip_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="<%=users_welcome_path%>/<%= current_user.id %>">WELCOME <%= current_user.first_name %></a>
+                <%= link_to "WELCOME #{current_user.first_name}", users_welcome_path(current_user.id), class: "nav-link active" %>
               </li>
-              <li class="nav-item">
-                <%= form_with url: session_path(current_user.id), action: 'destroy', method: "delete", class:"d-inline ml-2" do |f| %>
-                  <%= f.submit value: 'Déconnexion', class: "nav-link" %>
-                <% end %>
-                </li>
+              <li>
+              <%= link_to 'Déconnexion', session_path(current_user.id), method: :delete, class: "nav-link active"%>
+              </li>
             <% else %>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">S'inscrire / Se connecter</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="<%=new_user_path%>">Inscription</a></li>
-                  <li><a class="dropdown-item" href="<%=new_session_path%>">Connexion</a></li>
+                  <li>
+                    <%= link_to 'Inscription', new_user_path, class: "dropdown-item" %>
+                  </li>
+                  <li>
+                    <%= link_to 'Connexion', new_session_path, class: "dropdown-item" %>
+                  </li>
                 </ul>
               </li>
             <%end%>
