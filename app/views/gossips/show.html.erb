@@ -87,7 +87,7 @@
           <br>
           Likes : <%= Like.where(comment_id: comment.id).length%>
         </p>
-        <% if logged_in? %>
+         <% if logged_in? %>
         <div class="text-right my-3">
         <% if comment.commenting_user == current_user %>
           <a class="btn btn-secondary" href="<%= edit_gossip_comment_path(gossip_id: @gossip.id , id: comment.id) %>" role="button" >Modifier</a>

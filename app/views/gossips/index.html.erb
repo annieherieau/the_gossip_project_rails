@@ -11,7 +11,7 @@
   </div>
 
   <%# content %>
-  <% if logged_in? %>
+  <% if logged_in?%>
     <p class="text-center"> Bonjour :  <%= current_user.first_name %> [<%= current_user.id %>]  </p>
   <%end%>
   <div class="container overflow-hidden">
@@ -50,13 +50,16 @@
                   >Mofifier</a>
                   
               <% else %>
-                <%# LIKE %>
-                <% @already_liked = liked_gossip(current_user.id, gossip.id).length %>
-                <% @already_liked.zero? ? button_class ="btn btn-outline-success" : button_class ="btn btn-success" %>
-                <% @already_liked.zero? ? like_txt ="Like" : like_txt ="Unlike"  %>
-                <%= form_with url: likes_path(gossip_id: gossip.id, user_id: current_user.id), action: 'create', method: "post", class:"d-inline ml-2" do |f| %>
-                  <%= f.submit value: like_txt, class: button_class %>
-                <% end %>
+               <% if logged_in? %>
+                  <%# LIKE %>
+
+                  <% @already_liked = liked_gossip(current_user.id, gossip.id).length %>
+                  <% @already_liked.zero? ? button_class ="btn like-btn-on" : button_class ="btn like-btn-on" %>
+                  <% @already_liked.zero? ? like_txt ="Like" : like_txt ="Unlike"  %>
+                  <%= form_with url: likes_path(gossip_id: gossip.id, user_id: current_user.id), action: 'create', method: "post", class:"d-inline ml-2" do |f| %>
+                    <%= f.submit value: '', class: button_class %>
+                  <% end %>
+                  <%end%>
               <% end %>
 
               <%# LIRE %>

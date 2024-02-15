@@ -20,6 +20,8 @@ Gossip.destroy_all
 Tag.destroy_all
 Team.destroy_all
 Comment.destroy_all
+Like.destroy_all
+
 
 
 
