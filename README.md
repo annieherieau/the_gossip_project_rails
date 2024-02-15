@@ -29,10 +29,8 @@ To launch server
 
 ## Todo List:
 
-- Gossip.destroy : detruire commentaires et likes
 - Gossip: Select tags
-- système de login / logout avec une page de connexion
-- création de potin si l'utilisateur n'est pas connecté. Idem pour show du potin
-- destruction des potins
 - like gossip show, page ville, avec redirect back
-- User pasword
+- validation email
+- validation mots de passe
+- message d'alerte
