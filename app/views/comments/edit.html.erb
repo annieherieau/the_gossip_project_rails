@@ -16,9 +16,11 @@
       <%# FORMULAIRE COMMENTAIRE%>
       <%= form_with url: gossip_comment_path(content: params['content']), action: 'update', method: "patch"  do |f| %>
         <%# Content %>
-        <%= f.label :content, "Contenu :", class: "form-label"%>
-        <%= f.text_area :content, required: true, class: 'form-control', rows: 2, value: @comment.content %>
-        <br> 
+        <div class= "form-group required">
+          <%= f.label :content, "Contenu", class: "form-label"%>
+          <%= f.text_area :content, required: true, class: 'form-control', rows: 2, value: @comment.content %>
+        </div>
+          <br> 
         <%# Boutons %>
         <div class="text-right">
           <%# Submit %>

@@ -23,14 +23,16 @@
 
       <%# FORMULAIRE %>
       <%= form_with url: sessions_path, action: 'create', method: "post"  do |f| %>
-        <%# email %>
-        <% @user.email ? u_email = @user.email : u_email= '' %>
-        <%= f.label :email, "Email :", class: "form-label"%>
-        <%= f.email_field :email, required: true, class: 'form-control', value: u_email %>
-        <%# password %>
-        <%= f.label :input_pwd, "Mot de passe :", class: "form-label"%>
-        <%= f.password_field :input_pwd, required: true, class: 'form-control' %>
-        <br>
+        <div class= "form-group required">
+          <%# email %>
+          <% @user.email ? u_email = @user.email : u_email= '' %>
+          <%= f.label :email, "Email", class: "form-label"%>
+          <%= f.email_field :email, required: true, class: 'form-control', value: u_email %>
+          <%# password %>
+          <%= f.label :input_pwd, "Mot de passe", class: "form-label"%>
+          <%= f.password_field :input_pwd, required: true, class: 'form-control' %>
+          <br>
+        </div>
         <%# Boutons %>
         <div class="text-right">
           <%# Submit %>

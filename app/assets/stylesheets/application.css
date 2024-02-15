@@ -18,7 +18,8 @@
   padding-bottom: 20px;
 }
 
-.navbar {
-  margin-bottom: 20px;
+.required .form-label:after { 
+  color: #d00;
+  content: "*";
+  position: relative;
 }
-

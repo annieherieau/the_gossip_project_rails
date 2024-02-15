@@ -63,9 +63,11 @@
      
       <%# FORMULAIRE COMMENTAIRE%>
       <%= form_with url: create_comment_path, action: 'create', method: "post"  do |f| %>
-        <%# Content %>
-        <%= f.label :content, "Contenu :", class: "form-label"%>
-        <%= f.text_area :content, required: true, class: 'form-control', rows: 2 %>
+        <div class= "form-group required">
+          <%# Content %>
+          <%= f.label :content, "Contenu", class: "form-label"%>
+          <%= f.text_area :content, required: true, class: 'form-control', rows: 2 %>
+        </div>
         <br> 
         <%# Boutons %>
         <div class="text-right">
