@@ -1,6 +1,7 @@
 require 'bcrypt'
 class User < ApplicationRecord
 
+
   # table N-1
   belongs_to :city, optional: true
   # table N-N
@@ -17,16 +18,19 @@ class User < ApplicationRecord
   # Bcrypt
   # users.password_hash in the database is a :string
   include BCrypt
+  # attr_accessor :password_confirmation, :email_confirmation
 
   # VALIDATIONS
   validates :first_name, :last_name, presence: true
   validates :email, presence: true , uniqueness: true
   validates :age, numericality: { only_integer: true, greater_than_or_equal_to: 18 }
-  validates :password, presence: true, length: { minimum: 8 } # password du user (non conservé dans BDD, mais crypté dans password_hash)
+  validates :password,  presence: true
+  # validates_confirmation_of :password
+  # validates_confirmation_of :email
 
 
   def password
-    @password ||= Password.new(password_hash)
+    @password ||= Password.new(password_hash) if password_hash
   end
 
   def password=(new_password)
@@ -34,7 +38,6 @@ class User < ApplicationRecord
     self.password_hash = @password
   end
 
-  # authification lors du loggin (pwd tapé == pwd enregistré)
   def authenticate(password)
     @password == password
   end
