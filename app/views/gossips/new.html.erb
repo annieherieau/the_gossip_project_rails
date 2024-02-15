@@ -32,6 +32,14 @@
         <%= f.label :content, "Contenu", class: "form-label"%>
         <%= f.text_area :content, required: true, class: 'form-control', rows: 10, value: @gossip.content %>
       </div>
+      <%# Tags %>
+        <%= f.label :tag_ids, "Tags :", class: "form-label bold"%>
+       
+        <% tags = Tag.all.order('title')%>
+         <% tags.each_with_index do |t,i| %>
+            <input type="checkbox" class="btn-check" id="btn-check-<%=i %>" autocomplete="off">
+            <label class="btn" for="btn-check-<%=i %>"><%=t.title.capitalize %></label>
+        <% end %>
         <br> 
         <%# Boutons %>
         <div class="text-right">
