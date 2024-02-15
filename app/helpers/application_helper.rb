@@ -9,4 +9,8 @@ module ApplicationHelper
   def liked_gossip(user_id, gossip_id)
     Like.where(user_id: user_id, gossip_id: gossip_id)
   end
+
+  def find_city(user_id)
+    User.find(user_id).city
+  end
 end
