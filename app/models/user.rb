@@ -24,6 +24,7 @@ class User < ApplicationRecord
   validates :age, numericality: { only_integer: true, greater_than_or_equal_to: 18 }
   validates :password, presence: true, length: { minimum: 8 } # password du user (non conservé dans BDD, mais crypté dans password_hash)
 
+
   def password
     @password ||= Password.new(password_hash)
   end
@@ -33,4 +34,8 @@ class User < ApplicationRecord
     self.password_hash = @password
   end
 
+  # authification lors du loggin (pwd tapé == pwd enregistré)
+  def authenticate(password)
+    @password == password
+  end
 end
