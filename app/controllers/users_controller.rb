@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
-
+  before_action :authenticate_user, except: [:new, :create]
 
   def welcome
     @user = current_user if logged_in?
   end
 
   def show
-    @user = current_user if logged_in?
+    @user = User.find(params['id'])
     @city = @user.city
     @gossips = Gossip.where(author_id: @user.id)
     @comments = Comment.where(commenting_user_id: @user.id)

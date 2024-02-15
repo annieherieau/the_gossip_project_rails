@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     @gossip = Gossip.find(params[:id])
     @comment = Comment.new(
       commented_gossip: @gossip,
-      commenting_user:  ApplicationController.new.loged_user,
+      commenting_user: current_user,
       content: params['content']
       )
     if @comment.save

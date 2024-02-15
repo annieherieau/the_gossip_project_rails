@@ -1,4 +1,6 @@
 class GossipsController < ApplicationController
+  before_action :authenticate_user, except: [:index, :show]
+
   def index
     # Méthode qui récupère tous les potins et les envoie à la view index (index.html.erb) pour affichage
     @user = current_user
@@ -52,6 +54,7 @@ class GossipsController < ApplicationController
 
   def destroy
     # Méthode qui récupère le potin concerné et le détruit en base
+    
     @gossip = Gossip.find(params[:id])
     @gossip.destroy
     redirect_to root_path, notice: 'Supprimé !'

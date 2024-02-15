@@ -23,6 +23,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:user_id)
-    redirect_to session_path, status: :see_other
+    # redirect_to session_path, status: :see_other
   end
 end
