@@ -25,8 +25,7 @@
             <h3><%= gossip.title %></h3>
             <div>
               <p><strong>Auteur : <%= link_to "#{author.first_name}", user_path(author) %></strong>
-              <br>
-              Ville : <%= link_to "#{author.city.name}", city_path(author.city) %> </p>
+              <br></p>
              </div>
             <p><%= gossip.content %></p>
             <small>Potin n°<%= gossip.id %> - Commentaires : <%= Comment.where(commented_gossip_id: gossip.id).length %> - Likes : <%= Like.where(gossip_id: gossip.id).length %></small>

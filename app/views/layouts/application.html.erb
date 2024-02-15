@@ -33,32 +33,31 @@
               <a class="nav-link" aria-current="page" href="<%=root_path%>">Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<%=new_gossip_path%>">Ajouter un Gossip</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="<%=team_path%>">Team</a>
             </li>
-             <li class="nav-item">
-                <a class="nav-link" href="<%=contact_path%>">Contact</a>
+            <li class="nav-item">
+              <a class="nav-link" href="<%=contact_path%>">Contact</a>
+            </li>
+            <% if logged_in? %>
+              <li class="nav-item">
+                <a class="nav-link" href="<%=new_gossip_path%>">Ajouter un Gossip</a>
               </li>
-              <% if logged_in? %>
-                <li class="nav-item">
-                  <a class="nav-link active" href="<%=users_welcome_path%>/<%= current_user.id %>">WELCOME <%= current_user.first_name %></a>
-                </li>
-                <li class="nav-item">
-                 <%= form_with url: session_path(id: current_user.id, first_name: current_user.first_name), action: 'destroy', method: "delete", class:"d-inline ml-2" do |f| %>
+              <li class="nav-item">
+                <a class="nav-link active" href="<%=users_welcome_path%>/<%= current_user.id %>">WELCOME <%= current_user.first_name %></a>
+              </li>
+              <li class="nav-item">
+                <%= form_with url: session_path(id: current_user.id, first_name: current_user.first_name), action: 'destroy', method: "delete", class:"d-inline ml-2" do |f| %>
                   <%= f.submit value: 'Déconnexion', class: "nav-link" %>
-                  <%= link_to "Delete", session_path(current_user), data: { method: :delete } %>
                 <% end %>
                 </li>
-              <% else %>
+            <% else %>
                 <li class="nav-item">
                   <a class="nav-link" href="<%=new_user_path%>">Inscription</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link active" href="<%=new_session_path%>">Connexion</a>
                 </li>
-              <%end%>
+            <%end%>
 
           </ul>
         </div>

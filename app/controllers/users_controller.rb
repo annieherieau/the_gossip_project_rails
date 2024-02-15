@@ -2,11 +2,11 @@ class UsersController < ApplicationController
 
 
   def welcome
-    if logged_in? @user = current_user
+    @user = current_user if logged_in?
   end
 
   def show
-    if logged_in? @user = current_user
+    @user = current_user if logged_in?
     @city = @user.city
     @gossips = Gossip.where(author_id: @user.id)
     @comments = Comment.where(commenting_user_id: @user.id)
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     # @_errors.push(is_password_confirmed?) unless is_password_confirmed?
 
     if @user.save
-      login(@user)
+      log_in(@user)
       redirect_to root_path
     else
       render :new
