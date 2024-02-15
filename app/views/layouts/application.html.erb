@@ -39,6 +39,7 @@
               <a class="nav-link" href="<%=contact_path%>">Contact</a>
             </li>
             <% if logged_in? %>
+            
               <li class="nav-item">
                 <a class="nav-link" href="<%=new_gossip_path%>">Ajouter un Gossip</a>
               </li>
@@ -51,12 +52,13 @@
                 <% end %>
                 </li>
             <% else %>
-                <li class="nav-item">
-                  <a class="nav-link" href="<%=new_user_path%>">Inscription</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active" href="<%=new_session_path%>">Connexion</a>
-                </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">S'inscrire / Se connecter</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="<%=new_user_path%>">Inscription</a></li>
+                  <li><a class="dropdown-item" href="<%=new_session_path%>">Connexion</a></li>
+                </ul>
+              </li>
             <%end%>
 
           </ul>

@@ -34,16 +34,16 @@
         <%# email %>
         <%= f.label :email, "Email :", class: "form-label"%>
         <%= f.email_field :email, required: true, class: 'form-control', value: @user.email %>
-        <%= f.label :email, "Confirmation Email :", class: "form-label"%>
+        <!--<%= f.label :email, "Confirmation Email :", class: "form-label"%>
         <%= f.email_field :email_confirm, class: 'form-control' %>
-        TODO confirmation email required: true
+        TODO confirmation email required: true-->
         <br>
         <%# password %>
         <%= f.label :password, "Mot de passe :", class: "form-label"%>
         <%= f.password_field :password, required: true, class: 'form-control' %>
-        <%= f.label :password_confirm, "Mot de passe :", class: "form-label"%>
+        <!--<%= f.label :password_confirm, "Mot de passe :", class: "form-label"%>
         <%= f.password_field :password_confirm,  class: 'form-control'%>
-        TODO check longeur password / confirmation password required: true
+        TODO check longeur password / confirmation password required: true-->
         <br>
         <%# age %>
         <%= f.label :age, "Âge :", class: "form-label"%>
@@ -52,10 +52,12 @@
         <%# description %>
         <%= f.label :description, "Description :", class: "form-label"%>
         <%= f.text_area :description, class: 'form-control', rows:3, value: @user.description %>
+        
+        <br>
         <%# Ville %>
-        <%= f.label :city_id, "city_id :", class: "form-label"%>
-        <%= f.text_field :city_id, class: 'form-control', value: @user.city_id %>
-        TODO selection / création de la ville
+        <%= f.label :city_id, "Ville :", class: "form-label"%>
+        <br>
+        <%= f.collection_select :city_id, City.order(:name), :id, :name, class: 'form-control', value: @user.city_id  %>
         <br> 
         <%# Boutons %>
         <div class="text-right">
