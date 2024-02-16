@@ -13,12 +13,12 @@ Install dépendencies
   $ bundle install
 ```
 
-Install Database : create tables and seed
+Install Database : create tables
 
 ```bash
   $ rails db:create
   $ rails db:migrate
-  $ rails db:seed
+  $ rails db:seed # for seeding
 ```
 
 To launch server
@@ -30,7 +30,6 @@ To launch server
 ## Todo List:
 
 - Gossip: Select tags
-- like gossip show, page ville, avec redirect back
 - validation email
 - validation mots de passe
 - message d'alerte
