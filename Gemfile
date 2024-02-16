@@ -69,3 +69,4 @@ end
 gem "table_print", "~> 1.5"
 
 gem "faker", "~> 3.2", :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
+gem "dockerfile-rails", ">= 1.6", :group => :development

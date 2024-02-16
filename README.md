@@ -1,7 +1,11 @@
 # The Gossip Project - Rails app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Apprendre à utiliser le framework Ruby on Rails via une application basique qui gère les potins et les sessions utilisateur.
+
+## Fonctionnalités
+- Page d'accueil : tous les potins (auteurs, villes, contenus, nombre de commentaires, nombre de like)
+- pour les utilisateurs inscrits : CRUD potins, commentaires, likes
+
 
 ## Installation
 
