@@ -57,7 +57,7 @@
     <h3>Ajouter un commentaire</h3>
      
       <%# FORMULAIRE COMMENTAIRE%>
-      <%= form_with url: create_comment_path, action: 'create', method: "post"  do |f| %>
+      <%= form_with url: gossip_comments_path(@gossip), action: 'create', method: "post"  do |f| %>
         <div class= "form-group required">
           <%# Content %>
           <%= f.label :content, "Contenu", class: "form-label"%>

@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user
   def create
-    @gossip = Gossip.find(params[:id])
+    @gossip = Gossip.find(params[:gossip_id])
     @comment = Comment.new(
       commented_gossip: @gossip,
       commenting_user: current_user,
