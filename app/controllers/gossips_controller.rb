@@ -38,12 +38,11 @@ class GossipsController < ApplicationController
 
   def edit
     @gossip = Gossip.find(params[:id])
-    redirect_to root_path unless is_owner?(@gossip.id)
+    redirect_to root_path unless is_owner_of_gossip?(@gossip.id)
   end
 
   def update
     # Méthode qui met à jour le potin
-    
     if @gossip.update(post_params)
       redirect_to root_path
     else
@@ -53,6 +52,7 @@ class GossipsController < ApplicationController
 
   def destroy
     # Méthode qui récupère le potin concerné et le détruit en base
+    @gossip = Gossip.find(params[:id])
     @comments = Comment.where(commented_gossip_id:  @gossip.id)
     @comments.each {|c| c.destroy}
     @gossip.destroy

@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user
   def create
     @gossip = Gossip.find(params[:id])
     @comment = Comment.new(
@@ -13,6 +14,7 @@ class CommentsController < ApplicationController
   def edit
     @gossip = Gossip.find(params[:gossip_id])
     @comment = Comment.find(params[:id])
+    redirect_to gossip_path(@gossip) unless is_owner_of_comment?(@comment.id)
   end
 
   def update

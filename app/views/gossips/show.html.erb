@@ -85,7 +85,7 @@
         <p><strong><%= comment.commenting_user.first_name %></strong> :
          <%= comment.content %>
           <br>
-          Likes : <%=find_comment_likes(comment.id).length%>
+          id : <%= comment.id %> - Likes : <%=find_comment_likes(comment.id).length%>
         </p>
          <% if logged_in? %>
           <div class="text-right my-3">
