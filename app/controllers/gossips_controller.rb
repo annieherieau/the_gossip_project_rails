@@ -39,6 +39,7 @@ class GossipsController < ApplicationController
 
   def edit
     @gossip = Gossip.find(params[:id])
+    redirect_to root_path if @gossip.author != current_user
   end
 
   def update
@@ -54,9 +55,10 @@ class GossipsController < ApplicationController
 
   def destroy
     # Méthode qui récupère le potin concerné et le détruit en base
-    
     @gossip = Gossip.find(params[:id])
     @gossip.destroy
+    @comments = Comment.where(commented_gossip_id:  @gossip.id)
+    @comments.each {|c| c.destroy}
     redirect_to root_path, notice: 'Supprimé !'
   end
 
