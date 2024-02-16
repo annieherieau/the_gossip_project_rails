@@ -18,4 +18,8 @@ class LikesController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def delete
+    
+  end
 end

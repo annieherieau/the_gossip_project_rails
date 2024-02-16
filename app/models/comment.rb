@@ -8,4 +8,9 @@ class Comment < ApplicationRecord
   # Validations
   validates :content, presence: true
 
+  # scope :name, -> { where(:attibute => value)}
+  # Ex:- scope :active, -> {where(:active => true)}
+  scope :user, lambda { where(:attibute => value)}
+  # Ex:- scope :active, lambda {where(:active => true)}
+
 end
