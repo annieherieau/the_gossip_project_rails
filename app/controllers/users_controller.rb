@@ -37,6 +37,7 @@ class UsersController < ApplicationController
 
     if @user.save
       log_in(@user)
+      remember(@user) unless params['remember_check'].to_i.zero?
       redirect_to root_path
     else
       render :new
