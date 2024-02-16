@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   resources :cities
 
   # LIKES
-  resources :likes, only: [:create, :destroy]
+  resources :likes, only: [:show, :create, :destroy]
 
   # SESSIONS
   resources :sessions, only: [:new, :create, :destroy]

@@ -38,38 +38,32 @@
             <p><%= gossip.content %></p>
             <small>Potin n°<%= gossip.id %> - Commentaires : <%= find_gossip_comments(gossip.id).length %> 
             - Likes : <%= find_gossip_likes(gossip.id).length %></small>
-            
-            <% if logged_in? %>
             <!--LIENS -->
-            <div class="text-right">
-              <%# MODIFIER %>
-              <% if gossip.author ==  current_user %>
-                <a class="btn btn-secondary ml-2"
-                  href="<%= edit_gossip_path(gossip) %>"
-                  role="button"
-                  >Mofifier</a>
-                  
-              <% else %>
-               <% if logged_in? %>
-                  <%# LIKE %>
-
-                  <% @already_liked = liked_gossip(current_user.id, gossip.id).length %>
-                  <% @already_liked.zero? ? button_class ="btn btn-outline-success" : button_class ="btn btn-success" %>
-                  <% @already_liked.zero? ? like_txt ="Like" : like_txt ="Unlike"  %>
-                  <%= form_with url: likes_path(gossip_id: gossip.id, user_id: current_user.id), action: 'create', method: "post", class:"d-inline ml-2" do |f| %>
-                    <%= f.submit value: like_txt, class: button_class %>
-                  <% end %>
-                  <%end%>
-              <% end %>
-
+            <div class="d-flex my-3 justify-content-end">
+              <% if logged_in? %>
+                <%# MODIFIER %>
+                <% if is_owner_of_gossip?(gossip.id) %>
+                  <a class="btn btn-secondary mr-2"
+                    href="<%= edit_gossip_path(gossip) %>"
+                    role="button"
+                    >Mofifier</a>  
+                <% end %>
+                <% if logged_in? %>
+                      <%# LIKE %>
+                      <% like = liked_gossip(current_user, gossip) %>
+                      <% if like.empty? %>
+                         <%= button_to 'Like', likes_path(gossip_id: gossip.id, user_id: current_user.id), method: :post, class:"btn btn-outline-success d-inline"%>
+                      <% else %>
+                       <%= button_to 'Unlike', like_path(like.first.id), method: :delete, class: "btn btn-success d-inline"%>
+                      <%end%>
+                <% end %>
+              <%end%>
               <%# LIRE %>
               <a class="btn btn-primary ml-2" href="<%= gossip_path(gossip) %>" 
               role="button"
                 >Lire</a>
-              </div>
-            <% end %>
+            </div>
           </div>
-          
         </div>
       <% end %>
     </div>

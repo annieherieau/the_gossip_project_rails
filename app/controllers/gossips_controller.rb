@@ -1,6 +1,5 @@
 class GossipsController < ApplicationController
-  before_action :authenticate_user, except: [:index, :show]
-
+  before_action :authenticate_user, except: [:index, :show ]
   def index
     # Méthode qui récupère tous les potins et les envoie à la view index (index.html.erb) pour affichage
     @user = current_user
@@ -9,8 +8,8 @@ class GossipsController < ApplicationController
 
   def show
     # Méthode qui récupère le potin concerné et l'envoie à la view show (show.html.erb) pour affichage
-    @user = current_user
     @gossip = Gossip.find(params[:id])
+    @user = current_user
     @author = @gossip.author
     @comments = Comment.where(commented_gossip_id: @gossip.id) 
   end
@@ -39,12 +38,11 @@ class GossipsController < ApplicationController
 
   def edit
     @gossip = Gossip.find(params[:id])
-    redirect_to root_path if @gossip.author != current_user
+    redirect_to root_path unless is_owner?(@gossip.id)
   end
 
   def update
     # Méthode qui met à jour le potin
-    @gossip = Gossip.find(params[:id])
     
     if @gossip.update(post_params)
       redirect_to root_path
@@ -55,10 +53,9 @@ class GossipsController < ApplicationController
 
   def destroy
     # Méthode qui récupère le potin concerné et le détruit en base
-    @gossip = Gossip.find(params[:id])
-    @gossip.destroy
     @comments = Comment.where(commented_gossip_id:  @gossip.id)
     @comments.each {|c| c.destroy}
+    @gossip.destroy
     redirect_to root_path, notice: 'Supprimé !'
   end
 
@@ -69,4 +66,5 @@ class GossipsController < ApplicationController
     post_params = params.require(:gossip).permit(:title, :content)
   end
 
+  private
 end

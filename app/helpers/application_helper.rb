@@ -5,9 +5,12 @@ module ApplicationHelper
   def find_gossip_likes(id)
     Like.where(gossip_id: id)
   end
+  def find_comment_likes(id)
+    Like.where(comment_id: id)
+  end
 
-  def liked_gossip(user_id, gossip_id)
-    Like.where(user_id: user_id, gossip_id: gossip_id)
+  def liked_gossip(user, gossip)
+    Like.where(user_id: user.id, gossip_id: gossip.id)
   end
 
   def find_city(user_id)
