@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # GOSSIPS CRUD
   resources :gossips do
     resources :comments, only: [:edit, :update, :destroy]
+    resources :likes, only: [:show, :create, :destroy]
   end
 
   # COMMENTS
@@ -26,7 +27,7 @@ Rails.application.routes.draw do
   resources :cities
 
   # LIKES
-  resources :likes, only: [:show, :create, :destroy]
+
 
   # SESSIONS
   resources :sessions, only: [:new, :create, :destroy]

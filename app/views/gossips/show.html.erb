@@ -35,7 +35,7 @@
         </div>
       </div>
       <% if logged_in? %>
-       <div class="text-right my-3">
+       <div class="d-flex justify-content-end my-3">
           <% if @author == current_user %>
            <%#  SUPPRIMER %>
              <%= form_with(url: gossip_path(@gossip), method: "delete") do |f| %>
@@ -43,12 +43,13 @@
             <% end %>
           <% else %>
            <%# LIKE %>
-            <% @already_liked = Like.where(user_id: current_user.id, gossip_id: @gossip.id).length %>
-            <% @already_liked.zero? ? button_class ="btn btn-outline-success" : button_class ="btn btn-success" %>
-            <% @already_liked.zero? ? like_txt ="Like" : like_txt ="Unlike"  %>
-            <%= form_with url: likes_path(gossip_id: @gossip.id, user_id: current_user.id), action: 'create', method: "post", class:"d-inline ml-2" do |f| %>
-              <%= f.submit value: like_txt, class: button_class %>
-            <% end %>
+           <% like = liked_gossip(current_user, @gossip) %>
+              <% if like.empty? %>
+                  <%= button_to 'Like', gossip_likes_path(gossip_id: @gossip.id, user_id: current_user.id), method: :post, class:"btn btn-outline-success d-inline"%>
+              <% else %>
+                <%= button_to 'Unlike', gossip_like_path(gossip_id: @gossip.id, id: like.first.id), method: :delete, class: "btn btn-success d-inline"%>
+              <%end%>
+           
           <% end %>
         </div>
       <%end%>

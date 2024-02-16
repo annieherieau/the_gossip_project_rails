@@ -8,13 +8,13 @@ class LikesController < ApplicationController
       gossip_id: params['gossip_id'])
     
       if @like.save
-        redirect_to root_path
+        redirect_to request.referrer
       end
   end
 
   def destroy
     Like.find(params[:id].to_i).destroy
-    redirect_to root_path
+    redirect_to request.referrer
   end
 
   private
