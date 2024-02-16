@@ -15,13 +15,10 @@ Rails.application.routes.draw do
     resources :likes, only: [:show, :create, :destroy]
   end
 
-  # COMMENTS
-  # post 'gossips/:id', to: 'comments#create', as: 'create_comment'
-
   # USERS 
   get 'users/welcome'
   get 'users/welcome/:id', to: 'users#welcome'
-  resources :users, except: [:destroy]
+  resources :users
 
   # CITIES
   resources :cities
