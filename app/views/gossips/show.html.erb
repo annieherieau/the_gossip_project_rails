@@ -43,13 +43,7 @@
             <% end %>
           <% else %>
            <%# LIKE %>
-           <% like = liked_gossip(current_user, @gossip) %>
-              <% if like.empty? %>
-                  <%= button_to 'Like', gossip_likes_path(gossip_id: @gossip.id, user_id: current_user.id), method: :post, class:"btn btn-outline-success d-inline"%>
-              <% else %>
-                <%= button_to 'Unlike', gossip_like_path(gossip_id: @gossip.id, id: like.first.id), method: :delete, class: "btn btn-success d-inline"%>
-              <%end%>
-           
+            <%= gossip_like_buttons(@gossip, current_user, "btn btn-outline-success d-inline", "btn btn-success d-inline") %> 
           <% end %>
         </div>
       <%end%>

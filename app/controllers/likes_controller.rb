@@ -1,4 +1,5 @@
 class LikesController < ApplicationController
+  before_action :authenticate_user
   def show
     redirect_to root_path
   end
@@ -19,3 +20,8 @@ class LikesController < ApplicationController
 
   private
 end
+
+
+
+
+
