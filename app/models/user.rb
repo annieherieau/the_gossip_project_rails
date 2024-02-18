@@ -1,6 +1,5 @@
 require 'bcrypt'
 class User < ApplicationRecord
-  attr_accessor :email_confirmation, :password_confirmation
 
   # table N-1
   belongs_to :city, optional: true
@@ -40,10 +39,17 @@ class User < ApplicationRecord
 
   def authenticate(password)
     @password == password
+    errors.add :password, 'Passwords not identical'
   end
 
   def remember(remember_token)
     remember_digest = BCrypt::Password.create(remember_token)
     self.update(remember_digest: remember_digest)
+  end
+
+  private
+  def password_complexity
+    return if password.blank? || password.length >= 8 && password.match(/\d/) && password.match(/[a-z]/) && password.match(/[A-Z]/) && password.match(/[^a-zA-Z\d]/)
+    errors.add :password, 'Password must be at least 8 characters long and include at least one digit, one lowercase letter, one uppercase letter, and one special character.'
   end
 end
