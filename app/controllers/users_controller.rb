@@ -24,6 +24,7 @@ class UsersController < ApplicationController
       email: params['email'],
       email_confirmation: params['email_confirmation'],
       password: params['password'],
+      input_pwd: params['password'],
       password_confirmation: params['password_confirmation'],
       age: params['age'].to_s,
       description: params['description'],
