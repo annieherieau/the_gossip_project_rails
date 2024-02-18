@@ -28,16 +28,12 @@
           <% @user.email ? u_email = @user.email : u_email= '' %>
           <%= f.label :email, "Email", class: "form-label"%>
           <%= f.email_field :email, required: true, class: 'form-control', value: u_email %>
-          <%# confitmaytion email %>
-          <%= f.label :confirmation_email, "Confirmation Email", class: "form-label"%>
-          <%= f.email_field :confirmation_email, required: true, class: 'form-control' %>
+
           
           <%# password %>
           <%= f.label :input_pwd, "Mot de passe", class: "form-label"%>
           <%= f.password_field :input_pwd, required: true, class: 'form-control' %>
-           <%# confirmation password %>
-          <%= f.label :confirm_pwd, "Confirmation Mot de passe", class: "form-label"%>
-          <%= f.password_field :confirm_pwd, required: true, class: 'form-control' %>
+       
           
           <%# Remember cookie %>
            <br>

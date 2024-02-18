@@ -22,7 +22,9 @@ class UsersController < ApplicationController
       first_name: params['first_name'],
       last_name: params['last_name'],
       email: params['email'],
+      email_confirmation: params['email_confirmation'],
       password: params['password'],
+      password_confirmation: params['password_confirmation'],
       age: params['age'].to_s,
       description: params['description'],
       is_admin: false
