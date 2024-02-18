@@ -22,11 +22,12 @@ class User < ApplicationRecord
 
   # VALIDATIONS
   validates :first_name, :last_name, presence: true
-  validates :email, presence: true , uniqueness: true
+  validates :email, presence: true , uniqueness: true, confirmation: true
+  validates_confirmation_of :email
   validates :age, numericality: { only_integer: true, greater_than_or_equal_to: 18 }
   validates :password,  presence: true
   # validates_confirmation_of :password
-  # validates_confirmation_of :email
+ 
 
 
   def password
